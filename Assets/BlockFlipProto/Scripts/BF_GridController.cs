@@ -20,12 +20,12 @@ public class BF_GridController : MonoBehaviour
 
     void Awake()
     {
-        grid = new BF_TileData[lenght, breadth];
         InitializeGrid();
     }
 
     private void InitializeGrid()
     {
+        grid = new BF_TileData[lenght, breadth];
         for (int i = 0; i < lenght; i++)
         {
             for (int j = 0; j < breadth; j++)

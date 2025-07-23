@@ -17,6 +17,7 @@ public enum BlockRotationDirection
 
 public class BF_BlockMovementController : MonoBehaviour
 {
+    // Serialized variables
     [Header("Required Components")]
     [SerializeField] private BF_BlockTileChecker blockTileChecker;
 
@@ -26,25 +27,59 @@ public class BF_BlockMovementController : MonoBehaviour
     [SerializeField] private int depthBlockCount;
     [SerializeField] private BlockRotationDirection possibleRotationDirections;
 
+    //Private Region
     private Vector3 forwardRotationPoint;
     private Vector3 rightRotationPoint;
     private Vector3 backwardRotationPoint;
     private Vector3 leftRotationPoint;
-
     private Vector2 swipeStart;
     private bool isSwiping = false;
     private bool isRotating = false;
+    private float blockRotationSpeed;
 
+    // Public Region
     public Action<GameObject> onBlockDimentionCalculationBegin;
     public Action<GameObject> onBlockDimentionCalculationEnd;
     public Action OnBlockSettledDown;
 
-    void Start()
+    public void Init(float blockRotationSpeed)
     {
-        var occupiedTiles = blockTileChecker.CalculateTilesWhichBlockOccupied();
+        this.blockRotationSpeed = blockRotationSpeed;
+
+        blockTileChecker.CalculateTilesWhichBlockOccupied();
+        CalculateBlockDimentionsAndRotationPoints();
     }
 
     void Update()
+    {
+        TryRotateTheBlock();
+    }
+
+    #region Public Methods
+
+    public void CalculateBlockDimentionsAndRotationPoints()
+    {
+        onBlockDimentionCalculationBegin?.Invoke(gameObject);
+
+        forwardBlockCount = ForwardLengthDetector();
+        rightBlockCount = RightLengthDetector();
+        depthBlockCount = DepthDetector();
+
+        Vector3 initialPosition = transform.position + Vector3.down * 0.5f * depthBlockCount;
+
+        forwardRotationPoint = initialPosition + (Vector3.forward * 0.5f * forwardBlockCount);
+        rightRotationPoint = initialPosition + (Vector3.right * 0.5f * rightBlockCount);
+        backwardRotationPoint = initialPosition - (Vector3.forward * 0.5f * forwardBlockCount);
+        leftRotationPoint = initialPosition - (Vector3.right * 0.5f * rightBlockCount);
+
+        onBlockDimentionCalculationEnd?.Invoke(gameObject);
+    }
+
+    #endregion
+
+    #region Private Methods
+
+    private void TryRotateTheBlock()
     {
         if (!isRotating)
         {
@@ -97,30 +132,15 @@ public class BF_BlockMovementController : MonoBehaviour
         }
     }
 
-    public void CalculateBlockDimentionsAndRotationPoints()
-    {
-        onBlockDimentionCalculationBegin?.Invoke(gameObject);
-
-        forwardBlockCount = ForwardLengthDetector();
-        rightBlockCount = RightLengthDetector();
-        depthBlockCount = DepthDetector();
-
-        Vector3 initialPosition = transform.position + Vector3.down * 0.5f * depthBlockCount;
-
-        forwardRotationPoint = initialPosition + (Vector3.forward * 0.5f * forwardBlockCount);
-        rightRotationPoint = initialPosition + (Vector3.right * 0.5f * rightBlockCount);
-        backwardRotationPoint = initialPosition - (Vector3.forward * 0.5f * forwardBlockCount);
-        leftRotationPoint = initialPosition - (Vector3.right * 0.5f * rightBlockCount);
-
-        onBlockDimentionCalculationEnd?.Invoke(gameObject);
-    }
-
     private void RotateForward()
     {
         if (possibleRotationDirections.HasFlag(BlockRotationDirection.Forward))
             RotateBlock(forwardRotationPoint, Vector3.right);
         else
+        {
             Debug.Log("[BlockFlip_Gameplay] Forward rotation not possible.");
+            FakeRotation(forwardRotationPoint, Vector3.right);
+        }
     }
 
     private void RotateRight()
@@ -128,7 +148,10 @@ public class BF_BlockMovementController : MonoBehaviour
         if (possibleRotationDirections.HasFlag(BlockRotationDirection.Right))
             RotateBlock(rightRotationPoint, -Vector3.forward);
         else
+        {
             Debug.Log("[BlockFlip_Gameplay] Right rotation not possible.");
+            FakeRotation(rightRotationPoint, -Vector3.forward);
+        }
     }
 
     private void RotateBackward()
@@ -136,7 +159,10 @@ public class BF_BlockMovementController : MonoBehaviour
         if (possibleRotationDirections.HasFlag(BlockRotationDirection.Backward))
             RotateBlock(backwardRotationPoint, -Vector3.right);
         else
+        {
             Debug.Log("[BlockFlip_Gameplay] Backward rotation not possible.");
+            FakeRotation(backwardRotationPoint, -Vector3.right);
+        }
     }
 
     private void RotateLeft()
@@ -144,7 +170,56 @@ public class BF_BlockMovementController : MonoBehaviour
         if (possibleRotationDirections.HasFlag(BlockRotationDirection.Left))
             RotateBlock(leftRotationPoint, Vector3.forward);
         else
+        {
             Debug.Log("[BlockFlip_Gameplay] Left rotation not possible.");
+            FakeRotation(leftRotationPoint, Vector3.forward);
+        }
+    }
+
+    private void FakeRotation(Vector3 rotationPoint, Vector3 rotationAxis)
+    {
+        StartCoroutine(FakeRotationIEnum(rotationPoint, rotationAxis));
+    }
+
+    private IEnumerator FakeRotationIEnum(Vector3 rotationPoint, Vector3 rotationAxis)
+    {
+        isRotating = true;
+
+        float rotated = 0f;
+        float rotationSpeed = blockRotationSpeed;
+
+        // Rotate 30 degrees
+        while (rotated < 15f)
+        {
+            float step = rotationSpeed * Time.deltaTime;
+            if (rotated + step > 15f)
+                step = 15f - rotated;
+
+            transform.RotateAround(rotationPoint, rotationAxis, step);
+            rotated += step;
+
+            yield return null;
+        }
+
+        // Optional pause at the top
+        yield return new WaitForSeconds(0.1f);
+
+        // Rotate back to original position
+        rotated = 0f;
+        while (rotated < 15f)
+        {
+            float step = rotationSpeed * Time.deltaTime;
+            if (rotated + step > 15f)
+                step = 15f - rotated;
+
+            // Rotate back by negative angle
+            transform.RotateAround(rotationPoint, rotationAxis, -step);
+            rotated += step;
+
+            yield return null;
+        }
+
+        isRotating = false;
     }
 
     private void RotateBlock(Vector3 rotationPoint, Vector3 rotationAxis)
@@ -156,7 +231,7 @@ public class BF_BlockMovementController : MonoBehaviour
     {
         isRotating = true;
         float rotated = 0f;
-        float rotationSpeed = 360f; // degrees per second
+        float rotationSpeed = blockRotationSpeed;
 
         while (rotated < 90f)
         {
@@ -237,7 +312,6 @@ public class BF_BlockMovementController : MonoBehaviour
         }
     }
 
-
     private int DepthDetector()
     {
         Vector3 detectOriginPoint = transform.position + Vector3.forward * 4f;
@@ -267,6 +341,9 @@ public class BF_BlockMovementController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region  Gizmos
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -278,4 +355,5 @@ public class BF_BlockMovementController : MonoBehaviour
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(leftRotationPoint, 0.1f);
     }
+    #endregion
 }
