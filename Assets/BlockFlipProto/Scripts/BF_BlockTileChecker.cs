@@ -6,6 +6,7 @@ public class BF_BlockTileChecker : MonoBehaviour
 {
     [SerializeField] private List<GameObject> individualCubeLocations;
     [SerializeField] private BF_GridController gridController;
+    [SerializeField] private TileType tileTypeBlockIsAssociatedWith;
 
     [Header("DEBUG-ONLY values")]
     [SerializeField] private List<BF_TileData> occupiedTiles;
@@ -78,6 +79,12 @@ public class BF_BlockTileChecker : MonoBehaviour
                 BF_TileData tile = gridController.Grid[referenceTile.XPos - dz, referenceTile.YPos + dy];
                 Debug.Log($"[BlockFlip_Gameplay][PossibleMovements] Checking Left Movement at Tile: {tile.XPos}, {tile.YPos} --- TileStatus: {tile.TileStatus}");
 
+                if (tile.TileStatus == TileStatus.Home && tile.TileType == tileTypeBlockIsAssociatedWith)
+                {
+                    isLeftMovementPossible = true;
+                    break;
+                }
+
                 if (tile.TileStatus != TileStatus.Empty)
                 {
                     isLeftMovementPossible = false;
@@ -110,6 +117,12 @@ public class BF_BlockTileChecker : MonoBehaviour
 
                 BF_TileData tile = gridController.Grid[referenceTile.XPos + dz, referenceTile.YPos + dy];
                 Debug.Log($"[BlockFlip_Gameplay][PossibleMovements] Checking Left Movement at Tile: {tile.XPos}, {tile.YPos} --- TileStatus: {tile.TileStatus}");
+
+                if (tile.TileStatus == TileStatus.Home && tile.TileType == tileTypeBlockIsAssociatedWith)
+                {
+                    isRightMovementPossible = true;
+                    break;
+                }
 
                 if (tile.TileStatus != TileStatus.Empty)
                 {
@@ -144,6 +157,12 @@ public class BF_BlockTileChecker : MonoBehaviour
                 BF_TileData tile = gridController.Grid[referenceTile.XPos + dx, referenceTile.YPos + dz];
                 Debug.Log($"[BlockFlip_Gameplay][PossibleMovements] Checking Left Movement at Tile: {tile.XPos}, {tile.YPos} --- TileStatus: {tile.TileStatus}");
 
+                if (tile.TileStatus == TileStatus.Home && tile.TileType == tileTypeBlockIsAssociatedWith)
+                {
+                    isForwardMovementPossible = true;
+                    break;
+                }
+
                 if (tile.TileStatus != TileStatus.Empty)
                 {
                     isForwardMovementPossible = false;
@@ -176,6 +195,12 @@ public class BF_BlockTileChecker : MonoBehaviour
 
                 BF_TileData tile = gridController.Grid[referenceTile.XPos + dx, referenceTile.YPos - dz];
                 Debug.Log($"[BlockFlip_Gameplay][PossibleMovements] Checking Left Movement at Tile: {tile.XPos}, {tile.YPos} --- TileStatus: {tile.TileStatus}");
+
+                if (tile.TileStatus == TileStatus.Home && tile.TileType == tileTypeBlockIsAssociatedWith)
+                {
+                    isBackwardMovementPossible = true;
+                    break;
+                }
 
                 if (tile.TileStatus != TileStatus.Empty)
                 {

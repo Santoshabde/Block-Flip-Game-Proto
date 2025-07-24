@@ -206,7 +206,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.55436087, y: -0, z: -0, w: 0.8322764}
-  m_LocalPosition: {x: 3.46, y: 18.99, z: -1.96}
+  m_LocalPosition: {x: 9.62, y: 18.99, z: 4.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -636,12 +636,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa1a3c0a78a41174da24662c8bf71df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseTile: {fileID: 8508642907183235401, guid: 783061fa8a568ac4097758136c48eb84, type: 3}
+  tilesData:
+  - Type: 0
+    TileData: {fileID: 8508642907183235401, guid: 783061fa8a568ac4097758136c48eb84, type: 3}
+  - Type: 1
+    TileData: {fileID: 8508642907183235401, guid: ec96ec84a94f94d4ebe8bc60acb7fe88, type: 3}
+  - Type: 2
+    TileData: {fileID: 8508642907183235401, guid: d0e23a3fe896ea0429513eed315e8157, type: 3}
+  - Type: 3
+    TileData: {fileID: 8508642907183235401, guid: 034539c6382cfea458d4b71749561465, type: 3}
+  - Type: 4
+    TileData: {fileID: 8508642907183235401, guid: 19407462cb49ce64281fa20021f21e15, type: 3}
+  blockedTile: {fileID: 8217664102561444253, guid: a3d4d826ab5aadc42b8844865eb6083b, type: 3}
   gridParent: {fileID: 1721257252}
-  blockerParent: {fileID: 2121245685}
-  blockedPrefab: {fileID: 8217664102561444253, guid: a3d4d826ab5aadc42b8844865eb6083b, type: 3}
-  lenght: 8
-  breadth: 8
+  lenght: 20
+  breadth: 20
 --- !u!1 &1021200004 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 281559180522366282, guid: 7bbb17cea02e5bb4aac223bd88d11c41, type: 3}
@@ -877,6 +886,7 @@ MonoBehaviour:
   - {fileID: 1318788847}
   - {fileID: 1960016464}
   gridController: {fileID: 1004066547}
+  tileTypeBlockIsAssociatedWith: 2
   occupiedTiles: []
 --- !u!4 &3469287836900669856 stripped
 Transform:
@@ -891,13 +901,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1883153633}
     m_Modifications:
+    - target: {fileID: 3260295716663354976, guid: eca5a1ddd592fc3499594527a2858d96, type: 3}
+      propertyPath: tileTypeBlockIsAssociatedWith
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5507928306921478859, guid: eca5a1ddd592fc3499594527a2858d96, type: 3}
       propertyPath: m_Name
       value: Block_1_1
       objectReference: {fileID: 0}
     - target: {fileID: 7631425991579625546, guid: eca5a1ddd592fc3499594527a2858d96, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7631425991579625546, guid: eca5a1ddd592fc3499594527a2858d96, type: 3}
       propertyPath: m_LocalPosition.y
@@ -905,7 +919,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7631425991579625546, guid: eca5a1ddd592fc3499594527a2858d96, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7631425991579625546, guid: eca5a1ddd592fc3499594527a2858d96, type: 3}
       propertyPath: m_LocalRotation.w
@@ -939,6 +953,10 @@ PrefabInstance:
       propertyPath: gridController
       value: 
       objectReference: {fileID: 1004066547}
+    - target: {fileID: 8791910858166846997, guid: eca5a1ddd592fc3499594527a2858d96, type: 3}
+      propertyPath: tileTypeBlockIsAssociatedWith
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -965,6 +983,7 @@ MonoBehaviour:
   - {fileID: 707021718}
   - {fileID: 1021200004}
   gridController: {fileID: 1004066547}
+  tileTypeBlockIsAssociatedWith: 3
   occupiedTiles: []
 --- !u!4 &5817027782607162010 stripped
 Transform:
@@ -1007,13 +1026,17 @@ PrefabInstance:
       propertyPath: possibleRotationDirections
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 3762947640092911505, guid: 7bbb17cea02e5bb4aac223bd88d11c41, type: 3}
+      propertyPath: tileTypeBlockIsAssociatedWith
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 6196970982876569445, guid: 7bbb17cea02e5bb4aac223bd88d11c41, type: 3}
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6436512186442361256, guid: 7bbb17cea02e5bb4aac223bd88d11c41, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6436512186442361256, guid: 7bbb17cea02e5bb4aac223bd88d11c41, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1021,7 +1044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6436512186442361256, guid: 7bbb17cea02e5bb4aac223bd88d11c41, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6436512186442361256, guid: 7bbb17cea02e5bb4aac223bd88d11c41, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1095,13 +1118,17 @@ PrefabInstance:
       propertyPath: possibleRotationDirections
       value: -1
       objectReference: {fileID: 0}
+    - target: {fileID: 3162159579602199265, guid: defe2b9b0f613624fad781ba7e0a395b, type: 3}
+      propertyPath: tileTypeBlockIsAssociatedWith
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5101752913428350896, guid: defe2b9b0f613624fad781ba7e0a395b, type: 3}
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5506827146780578731, guid: defe2b9b0f613624fad781ba7e0a395b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.5
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 5506827146780578731, guid: defe2b9b0f613624fad781ba7e0a395b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1109,7 +1136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5506827146780578731, guid: defe2b9b0f613624fad781ba7e0a395b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.5
+      value: 9.5
       objectReference: {fileID: 0}
     - target: {fileID: 5506827146780578731, guid: defe2b9b0f613624fad781ba7e0a395b, type: 3}
       propertyPath: m_LocalRotation.w
