@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1134730478371271237}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,8 +43,11 @@ GameObject:
   - component: {fileID: 5642446422072534315}
   - component: {fileID: 1657175720545777974}
   - component: {fileID: 620696133491244061}
+  - component: {fileID: -1011416570374378444}
   - component: {fileID: 3162159579602199265}
-  m_Layer: 0
+  - component: {fileID: 5968872236110364244}
+  - component: {fileID: 3509115263220255718}
+  m_Layer: 6
   m_Name: Block_2_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59,7 +62,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2458960217771707895}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.5, y: 0, z: 5.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -144,6 +147,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-1011416570374378444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458960217771707895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eebe93835bff5cf4c8ebc28f71e9ac9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockMovementController: {fileID: 3162159579602199265}
+  blockTileChecker: {fileID: 5968872236110364244}
+  blockVFXController: {fileID: 3509115263220255718}
 --- !u!114 &3162159579602199265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -156,9 +174,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964b0cd19f579d14c8ce37ed1353e814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockController: {fileID: -1011416570374378444}
   forwardBlockCount: 0
   rightBlockCount: 0
   depthBlockCount: 0
+  possibleRotationDirections: -1
+--- !u!114 &5968872236110364244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458960217771707895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16ca6ab63c4906478185f153ab91976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockController: {fileID: -1011416570374378444}
+  individualCubeLocations:
+  - {fileID: 5101752913428350896}
+  - {fileID: 841400315858575412}
+  - {fileID: 3073860169186461626}
+  - {fileID: 7487717840112974751}
+  tileTypeBlockIsAssociatedWith: 2
+  occupiedTiles: []
+--- !u!114 &3509115263220255718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2458960217771707895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2e042632c17924b86e01857f8bd205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockMeshRenderer: {fileID: 1657175720545777974}
 --- !u!1 &3073860169186461626
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4260833825264347762}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +252,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4896523589676261183}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +283,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8600992958550567000}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}

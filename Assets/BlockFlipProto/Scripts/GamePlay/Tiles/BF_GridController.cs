@@ -1,0 +1,117 @@
+using System.Collections.Generic;
+using BlockFlipProto.Level;
+using UnityEngine;
+using UnityEngine.Tilemaps;
+
+namespace BlockFlipProto.Gameplay
+{
+    public enum TileStatus
+    {
+        Empty,
+        Occupied,
+        Blocked,
+        Home
+    }
+
+    public enum TileType
+    {
+        Base,
+        Green_Final,
+        Red_Final,
+        Yellow_Final,
+        Blue_Final,
+    }
+
+    [System.Serializable]
+    public struct TileInfo
+    {
+        public TileType Type;
+        public BF_TileData TileData;
+    }
+
+    public class BF_GridController : SerializeSingleton<BF_GridController>
+    {
+        [Header("Required Components")]
+        [Header("Tiles In Game")]
+        [SerializeField] private List<TileInfo> tilesData;
+
+        [Space(10)]
+        [Header("Tile Grid Settings")]
+        [SerializeField] private GameObject blockedTile;
+        [SerializeField] private Transform gridParent;
+
+        private BF_TileData[,] grid;
+        private List<((int, int), GameObject)> blockedTiles = new List<((int, int), GameObject)>();
+
+        public BF_TileData[,] Grid => grid;
+
+        public void InitializeBaseTileGrid(int lenght, int breadth)
+        {
+            grid = new BF_TileData[lenght, breadth];
+
+            for (int i = 0; i < lenght; i++)
+            {
+                for (int j = 0; j < breadth; j++)
+                {
+                    if (blockedTile != null)
+                    {
+                        blockedTile.SetActive(false);
+                    }
+
+                    Vector3 position = new Vector3(i, -0.5f, j);
+                    BF_TileData tile = Instantiate(tilesData.Find(t => t.Type == TileType.Base).TileData, position, Quaternion.identity);
+                    tile.Init(i, j, TileStatus.Empty);
+                    tile.transform.SetParent(gridParent);
+                    tile.name = $"Tile_{i}_{j}";
+                    grid[i, j] = tile;
+                }
+            }
+        }
+
+        public void SpawnBlockersOnBlockedTiles(List<TileIndex> blockedTilesIndices)
+        {
+            for (int i = 0; i < grid.GetLength(0); i++)
+            {
+                for (int j = 0; j < grid.GetLength(1); j++)
+                {
+                    if (blockedTilesIndices.Contains(new TileIndex(i, j)))
+                    {
+                        Vector3 position = new Vector3(i, 0, j);
+                        GameObject instantiatedBlockedTile = Instantiate(blockedTile, position, Quaternion.identity);
+                        instantiatedBlockedTile.SetActive(true);
+                        grid[i, j].Init(i, j, TileStatus.Blocked);
+                        instantiatedBlockedTile.transform.SetParent(gridParent);
+                        instantiatedBlockedTile.name = $"BlockedTile_{i}_{j}";
+
+                        blockedTiles.Add(((i, j), instantiatedBlockedTile));
+                    }
+                }
+            }
+        }
+
+        public void SpawnHomeTiles(List<TileIndex> yellowTileIndices)
+        {
+            List<BF_TileData> toDeleteTiles = new List<BF_TileData>();
+            for (int i = 0; i < grid.GetLength(0); i++)
+            {
+                for (int j = 0; j < grid.GetLength(1); j++)
+                {
+                    if (yellowTileIndices.Contains(new TileIndex(i, j)))
+                    {
+                        blockedTiles.Find(b => b.Item1 == (i, j)).Item2.SetActive(false);
+
+                        toDeleteTiles.Add(grid[i, j]);
+                        Vector3 position = new Vector3(i, -0.5f, j);
+                        BF_TileData tile = Instantiate(tilesData.Find(t => t.Type == TileType.Yellow_Final).TileData, position, Quaternion.identity);
+                        tile.Init(i, j, TileStatus.Home);
+                        tile.transform.SetParent(gridParent);
+                        tile.name = $"HomeTile_{i}_{j}";
+                        grid[i, j] = tile;
+                    }
+                }
+            }
+
+            toDeleteTiles.ForEach(t => Destroy(t.gameObject));
+        }
+    }
+}

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9167073843910927754}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,8 +43,11 @@ GameObject:
   - component: {fileID: 488826468206718355}
   - component: {fileID: 8933481045141875859}
   - component: {fileID: 909292184659098073}
+  - component: {fileID: 6222480266943090050}
   - component: {fileID: 3762947640092911505}
-  m_Layer: 0
+  - component: {fileID: 9196694143141559369}
+  - component: {fileID: 526852884722048252}
+  m_Layer: 6
   m_Name: Block_1_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,6 +145,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6222480266943090050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935317829580121450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eebe93835bff5cf4c8ebc28f71e9ac9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockMovementController: {fileID: 3762947640092911505}
+  blockTileChecker: {fileID: 9196694143141559369}
+  blockVFXController: {fileID: 526852884722048252}
 --- !u!114 &3762947640092911505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,9 +172,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964b0cd19f579d14c8ce37ed1353e814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockController: {fileID: 6222480266943090050}
   forwardBlockCount: 0
   rightBlockCount: 0
   depthBlockCount: 0
+  possibleRotationDirections: -1
+--- !u!114 &9196694143141559369
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935317829580121450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e16ca6ab63c4906478185f153ab91976, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockController: {fileID: 6222480266943090050}
+  individualCubeLocations:
+  - {fileID: 6196970982876569445}
+  - {fileID: 281559180522366282}
+  tileTypeBlockIsAssociatedWith: 3
+  occupiedTiles: []
+--- !u!114 &526852884722048252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935317829580121450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2e042632c17924b86e01857f8bd205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockMeshRenderer: {fileID: 8933481045141875859}
 --- !u!1 &6196970982876569445
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +217,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6938907096856305702}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

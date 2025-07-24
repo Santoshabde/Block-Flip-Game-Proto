@@ -12,8 +12,10 @@ GameObject:
   - component: {fileID: 5857283815371313592}
   - component: {fileID: 6968617902918876779}
   - component: {fileID: 3886186722780564756}
+  - component: {fileID: 2783021002122978777}
   - component: {fileID: 3260295716663354976}
   - component: {fileID: 8791910858166846997}
+  - component: {fileID: -4211161421527306037}
   m_Layer: 0
   m_Name: Block_1_1
   m_TagString: Untagged
@@ -111,6 +113,21 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2783021002122978777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507928306921478859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eebe93835bff5cf4c8ebc28f71e9ac9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockMovementController: {fileID: 3260295716663354976}
+  blockTileChecker: {fileID: 8791910858166846997}
+  blockVFXController: {fileID: -4211161421527306037}
 --- !u!114 &3260295716663354976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 964b0cd19f579d14c8ce37ed1353e814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockTileChecker: {fileID: 8791910858166846997}
+  blockController: {fileID: 2783021002122978777}
   forwardBlockCount: 0
   rightBlockCount: 0
   depthBlockCount: 0
@@ -140,10 +157,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e16ca6ab63c4906478185f153ab91976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blockController: {fileID: 2783021002122978777}
   individualCubeLocations:
   - {fileID: 6279919569444469873}
-  gridController: {fileID: 0}
+  tileTypeBlockIsAssociatedWith: 1
   occupiedTiles: []
+--- !u!114 &-4211161421527306037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5507928306921478859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f2e042632c17924b86e01857f8bd205, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockMeshRenderer: {fileID: 6968617902918876779}
 --- !u!1 &6279919569444469873
 GameObject:
   m_ObjectHideFlags: 0
