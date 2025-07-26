@@ -38,6 +38,7 @@ namespace BlockFlipProto.Gameplay
         private bool isSwiping = false;
         private bool isRotating = false;
         private float blockRotationSpeed;
+        private bool blockMovement = false;
 
         // Public Region
         public Action<GameObject> onBlockDimentionCalculationBegin;
@@ -54,6 +55,9 @@ namespace BlockFlipProto.Gameplay
 
         void Update()
         {
+            if(blockMovement)
+                return;
+            
             TryRotateTheBlock();
         }
 
@@ -79,13 +83,23 @@ namespace BlockFlipProto.Gameplay
 
         #endregion
 
-        #region Private Methods
+        #region Private Method
 
+        private enum MovementDirections
+        {
+            Left,
+            Right,
+            Forward,
+            Backward
+        }
+
+        private MovementDirections? continuousDirection = null;
+        private float rotationTimer = 0f;
         private void TryRotateTheBlock()
         {
             if (!isRotating)
             {
-                if (Input.GetMouseButtonDown(0) && !isSwiping)
+                if (Input.GetMouseButtonDown(0))
                 {
                     RaycastHit hit;
                     Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -104,33 +118,56 @@ namespace BlockFlipProto.Gameplay
                     }
                 }
 
-                if (Input.GetMouseButtonUp(0) && isSwiping)
+                if (Input.GetMouseButton(0) && isSwiping)
                 {
-                    Vector2 swipeEnd = Input.mousePosition;
-                    Vector2 swipeDelta = swipeEnd - swipeStart;
+                    Vector2 swipeDelta = (Vector2)Input.mousePosition - swipeStart;
 
                     Debug.Log("[BlockFlip_Gameplay] swipeStart: " + swipeStart + ", swipeEnd: " + Input.mousePosition + ", swipeDelta: " + swipeDelta);
-
-                    if (swipeDelta.magnitude > 30f) // Threshold for swipe detection
+                    if (swipeDelta.magnitude > 10f) // set initial direction
                     {
                         if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
                         {
-                            if (swipeDelta.x > 0)
-                                RotateRight();
-                            else
-                                RotateLeft();
+                            continuousDirection = swipeDelta.x > 0 ? MovementDirections.Right : MovementDirections.Left;
                         }
                         else
                         {
-                            if (swipeDelta.y > 0)
-                                RotateForward();
-                            else
-                                RotateBackward();
+                            continuousDirection = swipeDelta.y > 0 ? MovementDirections.Forward : MovementDirections.Backward;
                         }
+
+                       // rotationTimer = 0.4f; // trigger first move instantly
+                        Debug.Log("[BlockFlip_Gameplay] continuousDirection: " + continuousDirection);
                     }
 
-                    isSwiping = false;
+                    // Perform continuous rotation
+                    if (continuousDirection != null)
+                    {
+                        rotationTimer += Time.deltaTime;
+                        if (rotationTimer >= 0.1f)
+                        {
+                            RotateInDirection(continuousDirection.Value);
+                            rotationTimer = 0f;
+                            swipeStart = Input.mousePosition;
+                        }
+                    }
                 }
+            }
+
+            if (Input.GetMouseButtonUp(0) && isSwiping)
+            {
+                Debug.Log("[BlockFlip_Gameplay] Mouse button released, stopping rotation.");
+                isSwiping = false;
+                continuousDirection = null;
+            }
+        }
+
+        private void RotateInDirection(MovementDirections direction)
+        {
+            switch (direction)
+            {
+                case MovementDirections.Left: RotateLeft(); break;
+                case MovementDirections.Right: RotateRight(); break;
+                case MovementDirections.Forward: RotateForward(); break;
+                case MovementDirections.Backward: RotateBackward(); break;
             }
         }
 
@@ -254,7 +291,7 @@ namespace BlockFlipProto.Gameplay
             CalculateBlockDimentionsAndRotationPoints();
             var occupiedTiles = blockController.BlockTileChecker.CalculateTilesWhichBlockOccupied();
             possibleRotationDirections = blockController.BlockTileChecker.CalculatePosibleMovements(occupiedTiles, forwardBlockCount, rightBlockCount, depthBlockCount);
-            blockController.BlockTileChecker.CheckForBlockInHomeTile(occupiedTiles);
+            blockMovement = blockController.BlockTileChecker.CheckForBlockInHomeTile(occupiedTiles);
             isRotating = false;
         }
 

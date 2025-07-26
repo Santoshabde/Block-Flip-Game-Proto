@@ -85,13 +85,8 @@ namespace BlockFlipProto.Gameplay
                     BF_TileData tile = gridController.Grid[referenceTile.XPos - dz, referenceTile.YPos + dy];
                     Debug.Log($"[BlockFlip_Gameplay][PossibleMovements] Checking Left Movement at Tile: {tile.XPos}, {tile.YPos} --- TileStatus: {tile.TileStatus}");
 
-                    if (tile.TileStatus == TileStatus.Home && tile.TileType == tileTypeBlockIsAssociatedWith)
-                    {
-                        isLeftMovementPossible = true;
-                        break;
-                    }
-
-                    if (tile.TileStatus != TileStatus.Empty)
+                    if (tile.TileStatus == TileStatus.Blocked || tile.TileStatus == TileStatus.Occupied
+                   || (tile.TileStatus == TileStatus.Home && tile.TileType != tileTypeBlockIsAssociatedWith))
                     {
                         isLeftMovementPossible = false;
                         break;
@@ -124,13 +119,8 @@ namespace BlockFlipProto.Gameplay
                     BF_TileData tile = gridController.Grid[referenceTile.XPos + dz, referenceTile.YPos + dy];
                     Debug.Log($"[BlockFlip_Gameplay][PossibleMovements] Checking Left Movement at Tile: {tile.XPos}, {tile.YPos} --- TileStatus: {tile.TileStatus}");
 
-                    if (tile.TileStatus == TileStatus.Home && tile.TileType == tileTypeBlockIsAssociatedWith)
-                    {
-                        isRightMovementPossible = true;
-                        break;
-                    }
-
-                    if (tile.TileStatus != TileStatus.Empty)
+                    if (tile.TileStatus == TileStatus.Blocked || tile.TileStatus == TileStatus.Occupied
+                     || (tile.TileStatus == TileStatus.Home && tile.TileType != tileTypeBlockIsAssociatedWith))
                     {
                         isRightMovementPossible = false;
                         break;
@@ -163,13 +153,8 @@ namespace BlockFlipProto.Gameplay
                     BF_TileData tile = gridController.Grid[referenceTile.XPos + dx, referenceTile.YPos + dz];
                     Debug.Log($"[BlockFlip_Gameplay][PossibleMovements] Checking Left Movement at Tile: {tile.XPos}, {tile.YPos} --- TileStatus: {tile.TileStatus}");
 
-                    if (tile.TileStatus == TileStatus.Home && tile.TileType == tileTypeBlockIsAssociatedWith)
-                    {
-                        isForwardMovementPossible = true;
-                        break;
-                    }
-
-                    if (tile.TileStatus != TileStatus.Empty)
+                    if (tile.TileStatus == TileStatus.Blocked || tile.TileStatus == TileStatus.Occupied
+                     || (tile.TileStatus == TileStatus.Home && tile.TileType != tileTypeBlockIsAssociatedWith))
                     {
                         isForwardMovementPossible = false;
                         break;
@@ -202,13 +187,8 @@ namespace BlockFlipProto.Gameplay
                     BF_TileData tile = gridController.Grid[referenceTile.XPos + dx, referenceTile.YPos - dz];
                     Debug.Log($"[BlockFlip_Gameplay][PossibleMovements] Checking Left Movement at Tile: {tile.XPos}, {tile.YPos} --- TileStatus: {tile.TileStatus}");
 
-                    if (tile.TileStatus == TileStatus.Home && tile.TileType == tileTypeBlockIsAssociatedWith)
-                    {
-                        isBackwardMovementPossible = true;
-                        break;
-                    }
-
-                    if (tile.TileStatus != TileStatus.Empty)
+                    if (tile.TileStatus == TileStatus.Blocked || tile.TileStatus == TileStatus.Occupied
+                    || (tile.TileStatus == TileStatus.Home && tile.TileType != tileTypeBlockIsAssociatedWith))
                     {
                         isBackwardMovementPossible = false;
                         break;
@@ -226,7 +206,7 @@ namespace BlockFlipProto.Gameplay
             return possibleRotationDirections;
         }
 
-        public void CheckForBlockInHomeTile(List<BF_TileData> occupiedTiles)
+        public bool CheckForBlockInHomeTile(List<BF_TileData> occupiedTiles)
         {
             if (occupiedTiles.Any(tile => tile.TileType == tileTypeBlockIsAssociatedWith))
             {
@@ -238,7 +218,11 @@ namespace BlockFlipProto.Gameplay
                 blockController.BlockVFXController.AnimateBlockReachingHome(tileTypeBlockIsAssociatedWith);
 
                 SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.BlockSettledInHome, this.gameObject);
+
+                return true;
             }
+
+            return false;
         }
 
         public void SetTileTypeBlockIsAssociatedWith(TileType tileType)
