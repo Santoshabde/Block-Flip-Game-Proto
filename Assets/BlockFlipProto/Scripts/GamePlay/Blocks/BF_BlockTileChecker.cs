@@ -10,18 +10,18 @@ namespace BlockFlipProto.Gameplay
         [SerializeField] private BF_BlockController blockController;
 
         [SerializeField] private List<GameObject> individualCubeLocations;
-        [SerializeField] private TileType tileTypeBlockIsAssociatedWith;
 
         [Header("DEBUG-ONLY values")]
         [SerializeField] private List<BF_TileData> occupiedTiles;
 
         private BF_GridController gridController => BF_GridController.Instance;
+        private TileType tileTypeBlockIsAssociatedWith;
 
         public List<BF_TileData> CalculateTilesWhichBlockOccupied()
         {
             if (occupiedTiles != null)
             {
-                occupiedTiles.ForEach(tile => tile.SetTileStatus(TileStatus.Empty));
+                occupiedTiles.ForEach(tile => tile.RestoreTileStatusToEmptyOrHome());
             }
 
             occupiedTiles = new List<BF_TileData>();
@@ -233,12 +233,17 @@ namespace BlockFlipProto.Gameplay
                 BF_BlocksController.Instance.RemoveBlockFromBlocksController(this.gameObject);
 
                 //Turn all tiles into open tiles
-                occupiedTiles.ForEach(tile => tile.SetTileStatus(TileStatus.Empty));
+                occupiedTiles.ForEach(tile => tile.RestoreTileStatusToEmptyOrHome());
 
                 blockController.BlockVFXController.AnimateBlockReachingHome(tileTypeBlockIsAssociatedWith);
 
-                SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.BlockSettledInHome, this.gameObject); 
+                SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.BlockSettledInHome, this.gameObject);
             }
+        }
+
+        public void SetTileTypeBlockIsAssociatedWith(TileType tileType)
+        {
+            tileTypeBlockIsAssociatedWith = tileType;
         }
     }
 }

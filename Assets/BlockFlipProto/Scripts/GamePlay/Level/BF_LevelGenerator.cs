@@ -38,18 +38,21 @@ public class BF_LevelGenerator : MonoBehaviour
                     GameObject toInstantiateOneByOne = levelConfig.blocksInfo.Find(b => b.blockType == BlockTypes.OneByOne).block;
                     GameObject blockOneByOne = Instantiate(toInstantiateOneByOne, blockData.blockPosition, blockData.blockRotation);
                     blockOneByOne.GetComponent<BF_BlockVFXController>().AssignBlockMaterial(blockData.blockTileToWhichItBelongs);
+                    blockOneByOne.GetComponent<BF_BlockTileChecker>().SetTileTypeBlockIsAssociatedWith(blockData.blockTileToWhichItBelongs);
                     blocksController.AddBlockToBlocksController(blockOneByOne);
                     break;
                 case BlockTypes.OneByTwo:
                     GameObject toInstantiateOneByTwo = levelConfig.blocksInfo.Find(b => b.blockType == BlockTypes.OneByTwo).block;
                     GameObject blockOneByTwo = Instantiate(toInstantiateOneByTwo, blockData.blockPosition, blockData.blockRotation);
                     blockOneByTwo.GetComponent<BF_BlockVFXController>().AssignBlockMaterial(blockData.blockTileToWhichItBelongs);
+                    blockOneByTwo.GetComponent<BF_BlockTileChecker>().SetTileTypeBlockIsAssociatedWith(blockData.blockTileToWhichItBelongs);
                     blocksController.AddBlockToBlocksController(blockOneByTwo);
                     break;
                 case BlockTypes.TwoByTwo:
                     GameObject toInstantiateTwoByTwo = levelConfig.blocksInfo.Find(b => b.blockType == BlockTypes.TwoByTwo).block;
                     GameObject blockTwoByTwo = Instantiate(toInstantiateTwoByTwo, blockData.blockPosition, blockData.blockRotation);
                     blockTwoByTwo.GetComponent<BF_BlockVFXController>().AssignBlockMaterial(blockData.blockTileToWhichItBelongs);
+                    blockTwoByTwo.GetComponent<BF_BlockTileChecker>().SetTileTypeBlockIsAssociatedWith(blockData.blockTileToWhichItBelongs);
                     blocksController.AddBlockToBlocksController(blockTwoByTwo);
                     break;
             }
