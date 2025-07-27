@@ -302,10 +302,10 @@ namespace BlockFlipProto.Gameplay
         {
             Vector3 detectOriginPoint = transform.position + Vector3.up * 4f;
 
-            int blockCount = 1;
+            int blockCount = 0;
             while (true)
             {
-                Vector3 nextForwardPoint = detectOriginPoint + Vector3.forward * 0.95f * blockCount;
+                Vector3 nextForwardPoint = detectOriginPoint + Vector3.forward * 0.47f * (blockCount + 1);
                 RaycastHit hit;
                 if (Physics.Raycast(nextForwardPoint, -Vector3.up, out hit, 100f))
                 {
@@ -331,10 +331,10 @@ namespace BlockFlipProto.Gameplay
         {
             Vector3 detectOriginPoint = transform.position + Vector3.up * 4f;
 
-            int blockCount = 1;
+            int blockCount = 0;
             while (true)
             {
-                Vector3 nextRightPoint = detectOriginPoint + Vector3.right * 0.95f * blockCount;
+                Vector3 nextRightPoint = detectOriginPoint + Vector3.right * 0.47f * (blockCount + 1);
                 RaycastHit hit;
                 if (Physics.Raycast(nextRightPoint, -Vector3.up, out hit, 100f))
                 {
@@ -360,10 +360,10 @@ namespace BlockFlipProto.Gameplay
         {
             Vector3 detectOriginPoint = transform.position + Vector3.forward * 4f;
 
-            int blockCount = 1;
+            int blockCount = 0;
             while (true)
             {
-                Vector3 nextDepthPoint = detectOriginPoint + Vector3.down * 0.95f * blockCount;
+                Vector3 nextDepthPoint = detectOriginPoint + Vector3.down * 0.47f * (blockCount + 1);
                 RaycastHit hit;
                 if (Physics.Raycast(nextDepthPoint, -Vector3.forward, out hit, 100f))
                 {
