@@ -36,24 +36,32 @@ public class BF_LevelGenerator : MonoBehaviour
             {
                 case BlockTypes.OneByOne:
                     GameObject toInstantiateOneByOne = levelConfig.blocksInfo.Find(b => b.blockType == BlockTypes.OneByOne).block;
-                    GameObject blockOneByOne = Instantiate(toInstantiateOneByOne, blockData.blockPosition, blockData.blockRotation);
+                    GameObject blockOneByOne = Instantiate(toInstantiateOneByOne, blockData.blockPosition, Quaternion.Euler(blockData.blockRotation));
                     blockOneByOne.GetComponent<BF_BlockVFXController>().AssignBlockMaterial(blockData.blockTileToWhichItBelongs);
                     blockOneByOne.GetComponent<BF_BlockTileChecker>().SetTileTypeBlockIsAssociatedWith(blockData.blockTileToWhichItBelongs);
                     blocksController.AddBlockToBlocksController(blockOneByOne);
                     break;
                 case BlockTypes.OneByTwo:
                     GameObject toInstantiateOneByTwo = levelConfig.blocksInfo.Find(b => b.blockType == BlockTypes.OneByTwo).block;
-                    GameObject blockOneByTwo = Instantiate(toInstantiateOneByTwo, blockData.blockPosition, blockData.blockRotation);
+                    GameObject blockOneByTwo = Instantiate(toInstantiateOneByTwo, blockData.blockPosition, Quaternion.Euler(blockData.blockRotation));
                     blockOneByTwo.GetComponent<BF_BlockVFXController>().AssignBlockMaterial(blockData.blockTileToWhichItBelongs);
                     blockOneByTwo.GetComponent<BF_BlockTileChecker>().SetTileTypeBlockIsAssociatedWith(blockData.blockTileToWhichItBelongs);
                     blocksController.AddBlockToBlocksController(blockOneByTwo);
                     break;
                 case BlockTypes.TwoByTwo:
                     GameObject toInstantiateTwoByTwo = levelConfig.blocksInfo.Find(b => b.blockType == BlockTypes.TwoByTwo).block;
-                    GameObject blockTwoByTwo = Instantiate(toInstantiateTwoByTwo, blockData.blockPosition, blockData.blockRotation);
+                    GameObject blockTwoByTwo = Instantiate(toInstantiateTwoByTwo, blockData.blockPosition, Quaternion.Euler(blockData.blockRotation));
                     blockTwoByTwo.GetComponent<BF_BlockVFXController>().AssignBlockMaterial(blockData.blockTileToWhichItBelongs);
                     blockTwoByTwo.GetComponent<BF_BlockTileChecker>().SetTileTypeBlockIsAssociatedWith(blockData.blockTileToWhichItBelongs);
                     blocksController.AddBlockToBlocksController(blockTwoByTwo);
+                    break;
+
+                case BlockTypes.OneByThree:
+                    GameObject toInstantiateOneByThree = levelConfig.blocksInfo.Find(b => b.blockType == BlockTypes.OneByThree).block;
+                    GameObject blockOneByThree = Instantiate(toInstantiateOneByThree, blockData.blockPosition, Quaternion.Euler(blockData.blockRotation));
+                    blockOneByThree.GetComponent<BF_BlockVFXController>().AssignBlockMaterial(blockData.blockTileToWhichItBelongs);
+                    blockOneByThree.GetComponent<BF_BlockTileChecker>().SetTileTypeBlockIsAssociatedWith(blockData.blockTileToWhichItBelongs);
+                    blocksController.AddBlockToBlocksController(blockOneByThree);
                     break;
             }
 

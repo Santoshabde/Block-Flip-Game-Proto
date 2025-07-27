@@ -10,7 +10,8 @@ namespace BlockFlipProto.Level
     {
         OneByOne = 0,
         OneByTwo = 1,
-        TwoByTwo = 2
+        TwoByTwo = 2,
+        OneByThree = 3,
     }
 
     [System.Serializable]
@@ -86,7 +87,7 @@ namespace BlockFlipProto.Level
     {
         public BlockTypes blockType;
         public Vector3 blockPosition;
-        public Quaternion blockRotation;
+        public Vector3 blockRotation;
         public TileType blockTileToWhichItBelongs;
     }
 }
