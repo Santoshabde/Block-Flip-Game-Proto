@@ -47,6 +47,7 @@ GameObject:
   - component: {fileID: 3762947640092911505}
   - component: {fileID: 9196694143141559369}
   - component: {fileID: 526852884722048252}
+  - component: {fileID: -7579164754387668065}
   m_Layer: 6
   m_Name: Block_1_2
   m_TagString: Untagged
@@ -193,7 +194,6 @@ MonoBehaviour:
   individualCubeLocations:
   - {fileID: 6196970982876569445}
   - {fileID: 281559180522366282}
-  tileTypeBlockIsAssociatedWith: 3
   occupiedTiles: []
 --- !u!114 &526852884722048252
 MonoBehaviour:
@@ -208,6 +208,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blockMeshRenderer: {fileID: 8933481045141875859}
+  outlineFX: {fileID: -7579164754387668065}
+--- !u!114 &-7579164754387668065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935317829580121450}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 3
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &6196970982876569445
 GameObject:
   m_ObjectHideFlags: 0

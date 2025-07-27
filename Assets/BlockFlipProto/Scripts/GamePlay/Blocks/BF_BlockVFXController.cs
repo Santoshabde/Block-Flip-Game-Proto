@@ -9,6 +9,7 @@ namespace BlockFlipProto.Gameplay
     public class BF_BlockVFXController : MonoBehaviour
     {
         [SerializeField] private MeshRenderer blockMeshRenderer;
+        [SerializeField] private Outline outlineFX;
 
         public void AnimateBlockReachingHome(TileType homeTileType)
         {
@@ -52,6 +53,14 @@ namespace BlockFlipProto.Gameplay
                 }
             }
 
+        }
+
+        public void SetOutlineActive(bool isActive)
+        {
+            if (outlineFX != null)
+            {
+                outlineFX.enabled = isActive;
+            }
         }
     }
 }

@@ -55,9 +55,9 @@ namespace BlockFlipProto.Gameplay
 
         void Update()
         {
-            if(blockMovement)
+            if (blockMovement)
                 return;
-            
+
             TryRotateTheBlock();
         }
 
@@ -108,6 +108,7 @@ namespace BlockFlipProto.Gameplay
                         if (hit.collider != null && hit.collider.gameObject == gameObject)
                         {
                             Debug.Log("[BlockFlip_Gameplay] Block clicked: " + gameObject.name);
+                            blockController.BlockVFXController.SetOutlineActive(true);
 
                             isSwiping = true;
                             swipeStart = Input.mousePosition;
@@ -134,7 +135,7 @@ namespace BlockFlipProto.Gameplay
                             continuousDirection = swipeDelta.y > 0 ? MovementDirections.Forward : MovementDirections.Backward;
                         }
 
-                       // rotationTimer = 0.4f; // trigger first move instantly
+                        // rotationTimer = 0.4f; // trigger first move instantly
                         Debug.Log("[BlockFlip_Gameplay] continuousDirection: " + continuousDirection);
                     }
 
@@ -157,6 +158,8 @@ namespace BlockFlipProto.Gameplay
                 Debug.Log("[BlockFlip_Gameplay] Mouse button released, stopping rotation.");
                 isSwiping = false;
                 continuousDirection = null;
+
+                blockController.BlockVFXController.SetOutlineActive(false);
             }
         }
 
