@@ -1,6 +1,8 @@
 using System;
+using System.Collections;
 using BlockFlipProto.Gameplay;
 using BlockFlipProto.Level;
+using SNGames.CommonModule;
 using UnityEngine;
 
 public class BF_LevelGenerator : MonoBehaviour
@@ -11,12 +13,33 @@ public class BF_LevelGenerator : MonoBehaviour
     [SerializeField] private BF_GridController gridController;
     [SerializeField] private BF_BlocksController blocksController;
 
-    void Awake()
+
+    IEnumerator Start()
+    {
+        yield return new WaitForSeconds(0.1f);
+        FillUpCurrentLevel();
+    }
+
+    public void IncreaseCurrentLevel()
+    {
+        currentLevel++;
+        if (currentLevel > levelConfig.levelDatas.Count)
+        {
+            Debug.LogWarning("No more levels available. Resetting to level 1.");
+            currentLevel = 1;
+        }
+
+        // Reload the level with the new current level
+        FillUpCurrentLevel();
+    }
+
+    private void FillUpCurrentLevel()
     {
         // -- Fetching level data from the config
         BF_LevelData currentLevelData = JsonUtility.FromJson<BF_LevelData>(levelConfig.levelDatas[currentLevel - 1].levelJson);
 
         // -- Setting up the level data
+        gridController.ClearPrevGridTilesAndBlockedTiles();
         gridController.InitializeBaseTileGrid(currentLevelData.tileLenght, currentLevelData.tileBreadth);
         gridController.SpawnBlockersOnBlockedTiles(currentLevelData.blockedTilesIndices);
 
@@ -30,8 +53,13 @@ public class BF_LevelGenerator : MonoBehaviour
         Camera.main.transform.rotation = Quaternion.Euler(currentLevelData.cameraRotation);
         Camera.main.fieldOfView = currentLevelData.cameraFOV;
 
+        // -- Set Home Block Rotations
+        blocksController.ClearAllBlocksInGame();
+
         // -- Set Home Block Movement Directions
         blocksController.SetTileMovementDirectionsInHome(currentLevelData.tileMovementDirectionsInHome);
+
+        int numberOfTotalBlocksToClear = currentLevelData.blocksData.Count;
 
         // -- Spawning blocks based on the level data
         foreach (BlockData blockData in currentLevelData.blocksData)
@@ -71,5 +99,7 @@ public class BF_LevelGenerator : MonoBehaviour
 
             blocksController.WarmUpBlocks();
         }
+
+        SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.FreshLevelStarted, currentLevelData);
     }
 }

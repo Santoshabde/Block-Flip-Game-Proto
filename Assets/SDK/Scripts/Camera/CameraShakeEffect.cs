@@ -1,31 +1,71 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraShakeEffect : MonoBehaviour
+namespace SNGames.CommonModule
 {
-    [SerializeField] private Transform cameraTransform = default;
-    [SerializeField] private float shakeFrequency = default;
-
-    private Vector3 originalPosition = default;
-    public static bool ActivateCameraShake;
-
-    void Awake()
+    public class CameraShakeEffect : MonoBehaviour
     {
-        originalPosition = cameraTransform.localPosition;
-    }
+        private Vector3 originalPosition;
+        private Coroutine shakeCoroutine;
 
-    // Update is called once per frame
-    void LateUpdate()
-    {
-        if (ActivateCameraShake)
+        void Start()
         {
-            CameraShake();
+            SNEventsController<InGameEvents>.RegisterEvent(InGameEvents.FreshLevelStarted, FreshLevelStarted);
         }
-    }
 
-    private void CameraShake()
-    {
-        cameraTransform.localPosition += Random.insideUnitSphere * shakeFrequency;
+        private void FreshLevelStarted(object obj)
+        {
+            DeInit();
+            Init();
+        }
+
+        public void Init()
+        {
+            SNEventsController<InGameEvents>.RegisterEvent(InGameEvents.BlockRotationNotPossible, BlockRotationNotPossible);
+            originalPosition = transform.localPosition;
+        }
+
+        public void DeInit()
+        {
+            SNEventsController<InGameEvents>.DeregisterEvent(InGameEvents.BlockRotationNotPossible, BlockRotationNotPossible);
+        }
+
+        void OnDestroy()
+        {
+            DeInit();
+            SNEventsController<InGameEvents>.DeregisterEvent(InGameEvents.FreshLevelStarted, FreshLevelStarted);
+        }
+
+        private void BlockRotationNotPossible(object obj)
+        {
+            Debug.Log("[BlockFlip_Gameplay] #san Block rotation not possible, shaking camera.");
+            Shake(0.15f, 0.07f);
+        }
+
+        public void Shake(float duration, float magnitude)
+        {
+            if (shakeCoroutine != null)
+            {
+                StopCoroutine(shakeCoroutine);
+                transform.localPosition = originalPosition;
+            }
+
+            shakeCoroutine = StartCoroutine(ShakeCoroutine(duration, magnitude));
+        }
+
+        private IEnumerator ShakeCoroutine(float duration, float magnitude)
+        {
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                transform.localPosition = originalPosition + Random.insideUnitSphere * magnitude;
+                elapsed += Time.deltaTime;
+                yield return null;
+            }
+
+            transform.localPosition = originalPosition;
+            shakeCoroutine = null;
+        }
     }
 }

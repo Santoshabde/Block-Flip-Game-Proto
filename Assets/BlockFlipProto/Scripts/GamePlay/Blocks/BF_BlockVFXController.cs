@@ -24,16 +24,17 @@ namespace BlockFlipProto.Gameplay
         {
             MovementDirections movementDirection = BF_BlocksController.Instance.TileMovementDirectionsInHome.Find(t => t.tileIndex == homeTileType).movementDirection;
 
+            Debug.Log($"#san Moving block in direction: {movementDirection} for tile type: {homeTileType}");
             switch (movementDirection)
             {
                 case MovementDirections.Left:
-                    transform.DOMoveZ(-10f, 1f);
+                    transform.DOMoveX(-10f, 1f);
                     break;
                 case MovementDirections.Right:
-                    transform.DOMoveX(10f, 1f);
+                    transform.DOMove(transform.position + Vector3.right * 10f, 1f);
                     break;
                 case MovementDirections.Up:
-                    transform.DOMoveX(10f, 1f);
+                    transform.DOMoveZ(10f, 1f);
                     break;
                 case MovementDirections.Down:
                     transform.DOMoveZ(-10f, 1f);

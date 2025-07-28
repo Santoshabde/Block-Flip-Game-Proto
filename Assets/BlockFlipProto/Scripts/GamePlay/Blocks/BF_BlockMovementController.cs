@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.ComponentModel;
+using SNGames.CommonModule;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -220,6 +221,7 @@ namespace BlockFlipProto.Gameplay
 
         private void FakeRotation(Vector3 rotationPoint, Vector3 rotationAxis)
         {
+            SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.BlockRotationNotPossible, gameObject);
             StartCoroutine(FakeRotationIEnum(rotationPoint, rotationAxis));
         }
 

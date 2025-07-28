@@ -2,5 +2,7 @@ using UnityEngine;
 
 public enum InGameEvents
 {
-    BlockSettledInHome
+    FreshLevelStarted,
+    BlockSettledInHome,
+    BlockRotationNotPossible,
 }

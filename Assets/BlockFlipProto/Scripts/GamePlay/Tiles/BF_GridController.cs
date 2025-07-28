@@ -45,6 +45,32 @@ namespace BlockFlipProto.Gameplay
 
         public BF_TileData[,] Grid => grid;
 
+        public void ClearPrevGridTilesAndBlockedTiles()
+        {
+            if (grid != null)
+            {
+                foreach (var tile in grid)
+                {
+                    if (tile != null)
+                    {
+                        Destroy(tile.gameObject);
+                    }
+                }
+            }
+
+            grid = null;
+
+            foreach (var blockedTile in blockedTiles)
+            {
+                if (blockedTile.Item2 != null)
+                {
+                    Destroy(blockedTile.Item2);
+                }
+            }
+
+            blockedTiles.Clear();
+        }
+
         public void InitializeBaseTileGrid(int lenght, int breadth)
         {
             grid = new BF_TileData[lenght, breadth];

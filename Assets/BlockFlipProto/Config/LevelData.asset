@@ -283,10 +283,6 @@ MonoBehaviour:
       "y": 0,                 "z": 9.5             },             "blockRotation":
       {                 "x": 0,                 "y": 0,                 "z": 0            
       },             "blockTileToWhichItBelongs": 3         },         {            
-      "blockType": 1,             "blockPosition": {                 "x": 7,                
-      "y": 0,                 "z": 9.5             },             "blockRotation":
-      {                 "x": 0,                 "y": 0,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 1         },         {            
       "blockType": 0,             "blockPosition": {                 "x": 7,                
       "y": 0,                 "z": 12             },             "blockRotation":
       {                 "x": 0,                 "y": 0,                 "z": 0            
@@ -300,7 +296,7 @@ MonoBehaviour:
       {             "tileIndex": 3,             "movementDirection": "Down"        
       }     ] }'
   - levelNumber: 2
-    levelJson: "{     \"levelNumber\": 1,     \"levelName\": \"Level 1\",     \"levelTimeInSeconds\":
+    levelJson: "{     \"levelNumber\": 2,     \"levelName\": \"Level 1\",     \"levelTimeInSeconds\":
       300,     \"tileLenght\": 25,     \"tileBreadth\": 25,     \"blockedTilesIndices\":
       [         {             \"x\": 0,             \"y\": 0         },         {            
       \"x\": 0,             \"y\": 1         },         {             \"x\": 0,            
@@ -768,26 +764,33 @@ MonoBehaviour:
       },         {             \"x\": 24,             \"y\": 21         },        
       {             \"x\": 24,             \"y\": 22         },         {            
       \"x\": 24,             \"y\": 23         },         {             \"x\": 24,            
-      \"y\": 24         }     ],     \"redTilesIndices\": [],     \"greenTilesIndices\":
-      [],     \"blueTilesIndices\": [ \t\t{             \"x\": 5,             \"y\":
-      11         }, \t\t{             \"x\": 5,             \"y\": 12         },
-      \t\t{             \"x\": 4,             \"y\": 11         }, \t\t{            
-      \"x\": 4,             \"y\": 12         }, \t\t{             \"x\": 3,            
-      \"y\": 11         }, \t\t{             \"x\": 3,             \"y\": 12        
-      }, \t\t{             \"x\": 2,             \"y\": 11         }, \t\t{            
-      \"x\": 2,             \"y\": 12         } ],     \"yellowTilesIndices\": [        
-      {             \"x\": 12,             \"y\": 14         },         {            
-      \"x\": 12,             \"y\": 15         },         {             \"x\": 13,            
-      \"y\": 14         },         {             \"x\": 13,             \"y\": 15        
-      },         {             \"x\": 14,             \"y\": 14         },        
-      {             \"x\": 14,             \"y\": 15         },         {            
-      \"x\": 15,             \"y\": 14         },         {             \"x\": 15,            
-      \"y\": 15         },         {             \"x\": 16,             \"y\": 14        
-      },         {             \"x\": 16,             \"y\": 15         }     ],    
-      \"blocksData\": [         {             \"blockType\": 2,             \"blockPosition\":
-      {                 \"x\": 6.5,                 \"y\": 0,                 \"z\":
-      14.5             },             \"blockRotation\": {                 \"x\":
-      0,                 \"y\": 0,                 \"z\": 0             },            
+      \"y\": 24         }     ],     \"redTilesIndices\": [ \t\t{             \"x\":
+      5,             \"y\": 15         }, \t\t{             \"x\": 4,            
+      \"y\": 15         }, \t\t{             \"x\": 3,             \"y\": 15        
+      }, \t\t{             \"x\": 2,             \"y\": 15         }, \t\t{            
+      \"x\": 1,             \"y\": 15         } ],     \"greenTilesIndices\": [ \t\t{            
+      \"x\": 12,             \"y\": 11         }, \t\t{             \"x\": 13,            
+      \"y\": 11         }, \t\t{             \"x\": 14,             \"y\": 11        
+      }, \t\t{             \"x\": 15,             \"y\": 11         }, \t\t{            
+      \"x\": 16,             \"y\": 11         } ],     \"blueTilesIndices\": [ \t\t{            
+      \"x\": 5,             \"y\": 11         }, \t\t{             \"x\": 5,            
+      \"y\": 12         }, \t\t{             \"x\": 4,             \"y\": 11        
+      }, \t\t{             \"x\": 4,             \"y\": 12         }, \t\t{            
+      \"x\": 3,             \"y\": 11         }, \t\t{             \"x\": 3,            
+      \"y\": 12         }, \t\t{             \"x\": 2,             \"y\": 11        
+      }, \t\t{             \"x\": 2,             \"y\": 12         } ],     \"yellowTilesIndices\":
+      [         {             \"x\": 12,             \"y\": 14         },        
+      {             \"x\": 12,             \"y\": 15         },         {            
+      \"x\": 13,             \"y\": 14         },         {             \"x\": 13,            
+      \"y\": 15         },         {             \"x\": 14,             \"y\": 14        
+      },         {             \"x\": 14,             \"y\": 15         },        
+      {             \"x\": 15,             \"y\": 14         },         {            
+      \"x\": 15,             \"y\": 15         },         {             \"x\": 16,            
+      \"y\": 14         },         {             \"x\": 16,             \"y\": 15        
+      }     ],     \"blocksData\": [         {             \"blockType\": 2,            
+      \"blockPosition\": {                 \"x\": 6.5,                 \"y\": 0,                
+      \"z\": 14.5             },             \"blockRotation\": {                
+      \"x\": 0,                 \"y\": 0,                 \"z\": 0             },            
       \"blockTileToWhichItBelongs\": 3         },         {             \"blockType\":
       2,             \"blockPosition\": {                 \"x\": 6.5,                
       \"y\": 0.5,                 \"z\": 10             },             \"blockRotation\":
@@ -830,11 +833,10 @@ MonoBehaviour:
       \"x\": 8.5,         \"y\": 14.49,         \"z\": 8.06     },     \"cameraRotation\":
       {         \"x\": 70,         \"y\": 0,         \"z\": 0     },     \"cameraFOV\":
       60,     \"tileMovementDirectionsInHome\": [         {             \"tileIndex\":
-      2,             \"movementDirection\": \"Left\"         },         {            
-      \"tileIndex\": 4,             \"movementDirection\": \"Up\"         },        
-      {             \"tileIndex\": 1,             \"movementDirection\": \"Right\"        
-      },         {             \"tileIndex\": 3,             \"movementDirection\":
-      \"Down\"         }     ] }"
+      2,             \"movementDirection\": 0         },         {             \"tileIndex\":
+      4,             \"movementDirection\": 0         },         {             \"tileIndex\":
+      1,             \"movementDirection\": 1         },         {             \"tileIndex\":
+      3,             \"movementDirection\": 1         }     ] }"
   blocksInfo:
   - blockType: 0
     block: {fileID: 5507928306921478859, guid: eca5a1ddd592fc3499594527a2858d96, type: 3}

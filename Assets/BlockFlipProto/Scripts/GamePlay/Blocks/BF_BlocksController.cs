@@ -14,7 +14,7 @@ namespace BlockFlipProto.Gameplay
         [SerializeField] private float blockRotationSpeed = 360f;
 
         [SerializeField] private List<BlockMaterialType> blockMaterials;
-        private List<BF_BlockMovementController> blocksController;
+        private List<BF_BlockMovementController> blocksInGame;
         private List<TileMovementDirectionInHome> tileMovementDirectionsInHome;
 
         public List<TileMovementDirectionInHome> TileMovementDirectionsInHome => tileMovementDirectionsInHome;
@@ -26,19 +26,33 @@ namespace BlockFlipProto.Gameplay
             InitializeBlocks();
         }
 
+        public void ClearAllBlocksInGame()
+        {
+            UnAssignBlockDimentionsCalculationEvents();
+            if (blocksInGame != null)
+            {
+                foreach (BF_BlockMovementController block in blocksInGame)
+                {
+                    Destroy(block.gameObject);
+                }
+
+                blocksInGame.Clear();
+            }
+        }
+
         public void AddBlockToBlocksController(GameObject block)
         {
-            if (blocksController == null)
+            if (blocksInGame == null)
             {
-                blocksController = new List<BF_BlockMovementController>();
+                blocksInGame = new List<BF_BlockMovementController>();
             }
 
-            blocksController.Add(block.GetComponent<BF_BlockMovementController>());
+            blocksInGame.Add(block.GetComponent<BF_BlockMovementController>());
         }
 
         public void RemoveBlockFromBlocksController(GameObject block)
         {
-            blocksController.Remove(block.GetComponent<BF_BlockMovementController>());
+            blocksInGame.Remove(block.GetComponent<BF_BlockMovementController>());
         }
 
         public void SetTileMovementDirectionsInHome(List<TileMovementDirectionInHome> tileMovementDirections)
@@ -48,7 +62,7 @@ namespace BlockFlipProto.Gameplay
 
         private void AssignBlockDimentionsCalculationEvents()
         {
-            foreach (BF_BlockMovementController block in blocksController)
+            foreach (BF_BlockMovementController block in blocksInGame)
             {
                 block.onBlockDimentionCalculationBegin += onBlockDimentionCalculationBegin;
                 block.onBlockDimentionCalculationEnd += onBlockDimentionCalculationEnd;
@@ -57,7 +71,9 @@ namespace BlockFlipProto.Gameplay
 
         private void UnAssignBlockDimentionsCalculationEvents()
         {
-            foreach (BF_BlockMovementController block in blocksController)
+            if(blocksInGame == null) return;
+            
+            foreach (BF_BlockMovementController block in blocksInGame)
             {
                 block.onBlockDimentionCalculationBegin -= onBlockDimentionCalculationBegin;
                 block.onBlockDimentionCalculationEnd -= onBlockDimentionCalculationEnd;
@@ -66,7 +82,7 @@ namespace BlockFlipProto.Gameplay
 
         private void InitializeBlocks()
         {
-            blocksController.ForEach(block =>
+            blocksInGame.ForEach(block =>
             {
                 block.Init(blockRotationSpeed);
             });
@@ -74,7 +90,7 @@ namespace BlockFlipProto.Gameplay
 
         private void onBlockDimentionCalculationEnd(GameObject block)
         {
-            foreach (BF_BlockMovementController controller in blocksController)
+            foreach (BF_BlockMovementController controller in blocksInGame)
             {
                 controller.GetComponent<BoxCollider>().enabled = true;
             }
@@ -82,7 +98,7 @@ namespace BlockFlipProto.Gameplay
 
         private void onBlockDimentionCalculationBegin(GameObject block)
         {
-            foreach (BF_BlockMovementController controller in blocksController)
+            foreach (BF_BlockMovementController controller in blocksInGame)
             {
                 if (controller.gameObject != block)
                     controller.GetComponent<BoxCollider>().enabled = false;

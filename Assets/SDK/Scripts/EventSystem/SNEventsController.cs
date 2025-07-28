@@ -30,6 +30,7 @@ namespace SNGames.CommonModule
 
         public static void DeregisterEvent(T eventName, Action<object> listerner)
         {
+            if(!eventsInGame.ContainsKey(eventName)) return;
             eventsInGame[eventName] -= listerner;
         }
     }

@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10b9bb7c3c91e3348bb7617ffceba32e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 3
+  tileType: 2
   tileStatus: 0
   xPos: 0
   yPos: 0
