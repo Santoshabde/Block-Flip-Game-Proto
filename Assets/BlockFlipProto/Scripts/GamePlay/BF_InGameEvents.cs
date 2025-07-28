@@ -5,4 +5,5 @@ public enum InGameEvents
     FreshLevelStarted,
     BlockSettledInHome,
     BlockRotationNotPossible,
+    LevelComplete
 }
