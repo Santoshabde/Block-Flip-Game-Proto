@@ -144,7 +144,7 @@ namespace BlockFlipProto.Gameplay
                     if (continuousDirection != null)
                     {
                         rotationTimer += Time.deltaTime;
-                        if (rotationTimer >= 0.1f)
+                        if (rotationTimer >= 0.06f)
                         {
                             RotateInDirection(continuousDirection.Value);
                             rotationTimer = 0f;

@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using SNGames.CommonModule;
 using UnityEngine;
@@ -36,11 +37,22 @@ public class BF_Dlalog_LevelCompleted : BaseUIDialog
         banner.transform.DOMove(originalBannerPosition, 0.6f);
         buttonNextLevel.transform.DOMove(originalButtonNextLevelPosition, 0.6f);
 
+        buttonNextLevel.onClick.AddListener(OnNextLevelStart);
+
         base.OnOpenDialog();
+    }
+
+    private void OnNextLevelStart()
+    {
+        SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.StartNextLevel);
+
+        OnCloseDialog();
     }
 
     public override void OnCloseDialog()
     {
         base.OnCloseDialog();
+
+        buttonNextLevel.onClick.RemoveListener(OnNextLevelStart);
     }
 }

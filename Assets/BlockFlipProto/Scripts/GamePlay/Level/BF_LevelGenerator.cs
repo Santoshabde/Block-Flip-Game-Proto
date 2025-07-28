@@ -16,11 +16,18 @@ public class BF_LevelGenerator : MonoBehaviour
 
     IEnumerator Start()
     {
+        SNEventsController<InGameEvents>.RegisterEvent(InGameEvents.StartNextLevel, IncreaseCurrentLevel);
+
         yield return new WaitForSeconds(0.1f);
         FillUpCurrentLevel();
     }
 
-    public void IncreaseCurrentLevel()
+    void OnDestroy()
+    {
+        SNEventsController<InGameEvents>.DeregisterEvent(InGameEvents.StartNextLevel, IncreaseCurrentLevel);
+    }
+
+    public void IncreaseCurrentLevel(object obj)
     {
         currentLevel++;
         if (currentLevel > levelConfig.levelDatas.Count)

@@ -1031,7 +1031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a295cc2bdc038743bc613b4eb128164, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockRotationSpeed: 360
+  blockRotationSpeed: 550
   blockMaterials:
   - tileType: 1
     material: {fileID: 2100000, guid: bcde88ee440239043b468e1e9ce7f4db, type: 2}
