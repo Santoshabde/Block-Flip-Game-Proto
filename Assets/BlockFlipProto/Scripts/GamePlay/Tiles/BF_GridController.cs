@@ -89,23 +89,38 @@ namespace BlockFlipProto.Gameplay
             }
         }
 
-        public void SpawnHomeTiles(List<TileIndex> yellowTileIndices)
+        public void SpawnHomeTiles(List<TileIndex> tileIndices, TileType tileType)
         {
+            if( tileIndices == null || tileIndices.Count == 0)
+            {
+                return;
+            }
+
             List<BF_TileData> toDeleteTiles = new List<BF_TileData>();
+
             for (int i = 0; i < grid.GetLength(0); i++)
             {
                 for (int j = 0; j < grid.GetLength(1); j++)
                 {
-                    if (yellowTileIndices.Contains(new TileIndex(i, j)))
+                    if (tileIndices.Contains(new TileIndex(i, j)))
                     {
-                        blockedTiles.Find(b => b.Item1 == (i, j)).Item2.SetActive(false);
+                        // Deactivate blocked tile if any
+                        var blocked = blockedTiles.Find(b => b.Item1 == (i, j));
+                        if (blocked.Item2 != null)
+                        {
+                            blocked.Item2.SetActive(false);
+                        }
 
+                        // Mark tile for deletion
                         toDeleteTiles.Add(grid[i, j]);
+
+                        // Spawn new tile
                         Vector3 position = new Vector3(i, -0.5f, j);
-                        BF_TileData tile = Instantiate(tilesData.Find(t => t.Type == TileType.Yellow_Final).TileData, position, Quaternion.identity);
+                        BF_TileData tilePrefab = tilesData.Find(t => t.Type == tileType).TileData;
+                        BF_TileData tile = Instantiate(tilePrefab, position, Quaternion.identity);
                         tile.Init(i, j, TileStatus.Home);
                         tile.transform.SetParent(gridParent);
-                        tile.name = $"HomeTile_{i}_{j}";
+                        tile.name = $"HomeTile_{i}_{j}_{tileType}";
                         grid[i, j] = tile;
                     }
                 }
@@ -113,5 +128,6 @@ namespace BlockFlipProto.Gameplay
 
             toDeleteTiles.ForEach(t => Destroy(t.gameObject));
         }
+
     }
 }

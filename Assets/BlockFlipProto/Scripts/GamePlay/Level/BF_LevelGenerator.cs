@@ -19,7 +19,11 @@ public class BF_LevelGenerator : MonoBehaviour
         // -- Setting up the level data
         gridController.InitializeBaseTileGrid(currentLevelData.tileLenght, currentLevelData.tileBreadth);
         gridController.SpawnBlockersOnBlockedTiles(currentLevelData.blockedTilesIndices);
-        gridController.SpawnHomeTiles(currentLevelData.yellowTilesIndices);
+
+        gridController.SpawnHomeTiles(currentLevelData.yellowTilesIndices, TileType.Yellow_Final);
+        gridController.SpawnHomeTiles(currentLevelData.blueTilesIndices, TileType.Blue_Final);
+        gridController.SpawnHomeTiles(currentLevelData.redTilesIndices, TileType.Red_Final);
+        gridController.SpawnHomeTiles(currentLevelData.greenTilesIndices, TileType.Green_Final);
 
         // -- Setup camera position and rotation
         Camera.main.transform.position = currentLevelData.cameraPosition;

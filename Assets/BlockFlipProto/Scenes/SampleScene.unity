@@ -522,7 +522,7 @@ MonoBehaviour:
   - tileType: 3
     material: {fileID: 2100000, guid: 5e91440aea476c743841e7bb008afc54, type: 2}
   - tileType: 4
-    material: {fileID: 2100000, guid: 5e91440aea476c743841e7bb008afc54, type: 2}
+    material: {fileID: 2100000, guid: 6755ad145a7d7da4c825ce50000232e3, type: 2}
 --- !u!1 &764037752
 GameObject:
   m_ObjectHideFlags: 0
