@@ -13,9 +13,12 @@ public class HUDController : MonoBehaviour
 
     [SerializeField] private Text timerText;
     [SerializeField] private Text levelText;
+    [SerializeField] private Color freezeTimerColor;
+    [SerializeField] private Text extraTime;
 
     private Vector3 originalTopPannelPosition;
     private Vector3 originalBottomPannelPosition;
+    private bool freezeTimer;
 
     void Start()
     {
@@ -27,12 +30,48 @@ public class HUDController : MonoBehaviour
 
         SNEventsController<InGameEvents>.RegisterEvent(InGameEvents.FreshLevelStarted, FreshLevelStarted);
         SNEventsController<InGameEvents>.RegisterEvent(InGameEvents.LevelComplete, LevelComplete);
+        SNEventsController<InGameEvents>.RegisterEvent(InGameEvents.FreezeTimer, FreezeTimer);
     }
 
     void OnDestroy()
     {
         SNEventsController<InGameEvents>.DeregisterEvent(InGameEvents.FreshLevelStarted, FreshLevelStarted);
         SNEventsController<InGameEvents>.DeregisterEvent(InGameEvents.LevelComplete, LevelComplete);
+        SNEventsController<InGameEvents>.DeregisterEvent(InGameEvents.FreezeTimer, FreezeTimer);
+    }
+
+    private void FreezeTimer(object obj)
+    {
+        extraTime.gameObject.SetActive(true);
+        float duration = (float)obj;
+        Debug.Log($"[BlockFlip_Gameplay][FreezeTimer] Freezing timer for {duration} seconds.");
+        StartCoroutine(FreezeTimerCoroutine());
+
+        IEnumerator FreezeTimerCoroutine()
+        {
+            freezeTimer = true;
+            timerText.DOColor(freezeTimerColor, 1f);
+
+            float remaining = duration;
+            extraTime.gameObject.SetActive(true);
+
+            while (remaining > 0f)
+            {
+                int seconds = Mathf.CeilToInt(remaining);
+                extraTime.text = $"00:{seconds:00}";
+                yield return null;
+                remaining -= Time.deltaTime;
+            }
+
+            extraTime.text = "00:00";
+            extraTime.gameObject.SetActive(false);
+
+            freezeTimer = false;
+            timerText.DOColor(Color.white, 1f);
+            extraTime.gameObject.SetActive(false);
+
+            SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.PowerUpDeactivated, PowerupTypeInGame.FreezeTimerPowerup);
+        }
     }
 
     private void AnimateTopPannelUnHide()
@@ -88,6 +127,12 @@ public class HUDController : MonoBehaviour
         float elapsedTime = 0f;
         while (elapsedTime < duration)
         {
+            if (freezeTimer)
+            {
+                yield return null;
+                continue;
+            }
+
             elapsedTime += Time.deltaTime;
             float remainingTime = Mathf.Max(duration - elapsedTime, 0f);
             int minutes = Mathf.FloorToInt(remainingTime / 60f);

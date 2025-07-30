@@ -6,5 +6,8 @@ public enum InGameEvents
     FreshLevelStarted,
     BlockSettledInHome,
     BlockRotationNotPossible,
-    LevelComplete
+    LevelComplete,
+    FreezeTimer,
+    PowerupActivated,
+    PowerUpDeactivated
 }

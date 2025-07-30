@@ -29,6 +29,18 @@ public abstract class BF_BasePowerup : MonoBehaviour
         this.powerUpAmount.text = amount.ToString();
 
         powerupsLeft = amount;
+        if (powerupsLeft <= 0)
+        {
+            powerupsLeft = 0;
+            SetPowerupInteractablity(false);
+        }
+
+        powerupButton.onClick.AddListener(ExcutePowerup);
+    }
+
+    public void SetPowerupInteractablity(bool interactable)
+    {
+        powerupButton.interactable = powerupsLeft > 0 ? interactable : false;
     }
 
     public void LockPowerup()
@@ -45,6 +57,11 @@ public abstract class BF_BasePowerup : MonoBehaviour
         unlockContainer.SetActive(true);
 
         powerupButton.interactable = true;
+    }
+
+    void OnDestroy()
+    {
+        powerupButton.onClick.RemoveListener(ExcutePowerup);
     }
 
     public abstract void ExcutePowerup();

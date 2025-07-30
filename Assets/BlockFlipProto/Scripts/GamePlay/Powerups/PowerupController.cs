@@ -14,6 +14,26 @@ public class PowerupController : MonoBehaviour
     void Awake()
     {
         SNEventsController<InGameEvents>.RegisterEvent(InGameEvents.FreshLevelStarted, FreshLevelStarted);
+        SNEventsController<InGameEvents>.RegisterEvent(InGameEvents.PowerupActivated, PowerupActivated);
+        SNEventsController<InGameEvents>.RegisterEvent(InGameEvents.PowerUpDeactivated, PowerUpDeactivated);
+    }
+
+    private void PowerUpDeactivated(object obj)
+    {
+        foreach (BF_BasePowerup powerup in powerups)
+        {
+            powerup.SetPowerupInteractablity(true);
+        }
+    }
+
+    private void PowerupActivated(object obj)
+    {
+        PowerupTypeInGame powerupTypeInGame = (PowerupTypeInGame)obj;
+
+        foreach (BF_BasePowerup powerup in powerups)
+        {
+            powerup.SetPowerupInteractablity(false);
+        }
     }
 
     private void FreshLevelStarted(object obj)
