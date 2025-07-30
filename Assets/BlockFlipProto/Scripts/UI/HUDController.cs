@@ -58,7 +58,7 @@ public class HUDController : MonoBehaviour
             while (remaining > 0f)
             {
                 int seconds = Mathf.CeilToInt(remaining);
-                extraTime.text = $"00:{seconds:00}";
+                extraTime.text = $"+00:{seconds:00}";
                 yield return null;
                 remaining -= Time.deltaTime;
             }

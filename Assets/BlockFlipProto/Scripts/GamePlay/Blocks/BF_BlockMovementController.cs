@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using SNGames.CommonModule;
 using UnityEngine;
@@ -40,6 +41,7 @@ namespace BlockFlipProto.Gameplay
         private bool isRotating = false;
         private float blockRotationSpeed;
         private bool blockMovement = false;
+        private bool blockDestroyerPowerupActivated = false;
 
         // Public Region
         public Action<GameObject> onBlockDimentionCalculationBegin;
@@ -52,6 +54,27 @@ namespace BlockFlipProto.Gameplay
 
             blockController.BlockTileChecker.CalculateTilesWhichBlockOccupied();
             CalculateBlockDimentionsAndRotationPoints();
+
+            SNEventsController<InGameEvents>.RegisterEvent(InGameEvents.PowerupActivated, PowerupActivated);
+            SNEventsController<InGameEvents>.RegisterEvent(InGameEvents.PowerUpDeactivated, PowerUpDeactivated);
+        }
+
+        private void PowerUpDeactivated(object obj)
+        {
+            PowerupTypeInGame powerupActivated = (PowerupTypeInGame)obj;
+            if (powerupActivated == PowerupTypeInGame.BlockDestroyer)
+            {
+                blockDestroyerPowerupActivated = false;
+            }
+        }
+
+        private void PowerupActivated(object obj)
+        {
+            PowerupTypeInGame powerupActivated = (PowerupTypeInGame)obj;
+            if (powerupActivated == PowerupTypeInGame.BlockDestroyer)
+            {
+                blockDestroyerPowerupActivated = true;
+            }
         }
 
         void Update()
@@ -59,7 +82,10 @@ namespace BlockFlipProto.Gameplay
             if (blockMovement)
                 return;
 
-            TryRotateTheBlock();
+            if (!blockDestroyerPowerupActivated)
+                TryRotateTheBlock();
+            else
+                TryDestroyTheBlock();
         }
 
         #region Public Methods  
@@ -92,6 +118,32 @@ namespace BlockFlipProto.Gameplay
             Right,
             Forward,
             Backward
+        }
+
+        private void TryDestroyTheBlock()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.collider != null && hit.collider.gameObject == gameObject)
+                    {
+                        //Opening all tiles it activated
+                        List<BF_TileData> occupiedTiles = blockController.BlockTileChecker.CalculateTilesWhichBlockOccupied();
+                        foreach (BF_TileData tile in occupiedTiles)
+                        {
+                            tile.RestoreTileStatusToEmptyOrHome();
+                        }
+
+                        SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.BlockSettledInHome, this.gameObject);
+                        SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.PowerUpDeactivated, PowerupTypeInGame.BlockDestroyer);
+
+                        BF_BlocksController.Instance.ClearBlock(this);
+                    }
+                }
+            }
         }
 
         private MovementDirections? continuousDirection = null;

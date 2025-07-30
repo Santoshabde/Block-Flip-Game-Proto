@@ -26,6 +26,16 @@ namespace BlockFlipProto.Gameplay
             InitializeBlocks();
         }
 
+        public void ClearBlock(BF_BlockMovementController block)
+        {
+            blocksInGame.Remove(block);
+
+            block.onBlockDimentionCalculationBegin -= onBlockDimentionCalculationBegin;
+            block.onBlockDimentionCalculationEnd -= onBlockDimentionCalculationEnd;
+
+            Destroy(block.gameObject);
+        }
+
         public void ClearAllBlocksInGame()
         {
             UnAssignBlockDimentionsCalculationEvents();
@@ -71,8 +81,8 @@ namespace BlockFlipProto.Gameplay
 
         private void UnAssignBlockDimentionsCalculationEvents()
         {
-            if(blocksInGame == null) return;
-            
+            if (blocksInGame == null) return;
+
             foreach (BF_BlockMovementController block in blocksInGame)
             {
                 block.onBlockDimentionCalculationBegin -= onBlockDimentionCalculationBegin;
