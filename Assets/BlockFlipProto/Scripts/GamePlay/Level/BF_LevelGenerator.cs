@@ -36,12 +36,17 @@ public class BF_LevelGenerator : MonoBehaviour
             currentLevel = 1;
         }
 
+        BF_GameSaveSystem.SaveLevel(currentLevel);
+
         // Reload the level with the new current level
         FillUpCurrentLevel();
     }
 
     private void FillUpCurrentLevel()
     {
+        // -- Loading currentLevel From Saved Data
+        currentLevel = BF_GameSaveSystem.GetLevel();
+
         // -- Fetching level data from the config
         BF_LevelData currentLevelData = JsonUtility.FromJson<BF_LevelData>(levelConfig.levelDatas[currentLevel - 1].levelJson);
 

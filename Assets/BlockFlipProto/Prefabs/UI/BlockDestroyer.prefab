@@ -323,8 +323,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 460ca79aab1a5bc419f3e6194c8eeaa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerupType: 1
   powerupButton: {fileID: 208375588767706977}
   levelAtWichPowerupUnlocks: {fileID: 5950366144521922824}
+  powerUpAmount: {fileID: 8203770880813389004}
   lockContainer: {fileID: 2744345960417109029}
   unlockContainer: {fileID: 6993696278059685202}
   currentStatus: 0

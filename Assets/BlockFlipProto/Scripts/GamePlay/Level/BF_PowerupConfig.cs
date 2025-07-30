@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PowerupData", menuName = "Powerups/PowerupData", order = 1)]
@@ -8,7 +9,7 @@ public class BF_PowerupConfig : ScriptableObject
 }
 
 [System.Serializable]
-public enum PowerupsInGame
+public enum PowerupTypeInGame
 {
     FreezeTimerPowerup,
     BlockDestroyer,
@@ -18,7 +19,8 @@ public enum PowerupsInGame
 [System.Serializable]
 public class PowerupsInGameData
 {
-    public PowerupsInGame powerupType;
+    public PowerupTypeInGame powerupType;
     public int levelInWhichThisUnlocks;
     public BF_BasePowerup powerup;
+    public int defaultAmount;
 }

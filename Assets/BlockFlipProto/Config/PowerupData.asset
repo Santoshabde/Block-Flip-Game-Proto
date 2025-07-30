@@ -16,6 +16,8 @@ MonoBehaviour:
   - powerupType: 0
     levelInWhichThisUnlocks: 0
     powerup: {fileID: 2108306708070220596, guid: 078842b4aed3bba429579c4cd1b38c96, type: 3}
+    defaultAmount: 5
   - powerupType: 1
     levelInWhichThisUnlocks: 6
     powerup: {fileID: 1814813225530262468, guid: 159a6aadd2dd8a64191bb4a3f2bf66a5, type: 3}
+    defaultAmount: 5
