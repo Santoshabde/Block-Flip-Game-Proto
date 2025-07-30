@@ -146,6 +146,7 @@ MonoBehaviour:
   rightBlockCount: 0
   depthBlockCount: 0
   possibleRotationDirections: -1
+  collider: {fileID: 3886186722780564756}
 --- !u!114 &8791910858166846997
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -56,6 +56,24 @@ namespace BlockFlipProto.Gameplay
 
         }
 
+        public void PlayDissolveEffect()
+        {
+            Vector3 currentOffset = new Vector3(0, -1f, 0);
+            Vector3 endOffset = new Vector3(0, 1f, 0);
+
+            DOTween.To(
+                () => currentOffset,
+                value =>
+                {
+                    currentOffset = value;
+                    blockMeshRenderer.material.SetVector("DissolveOffest", value);
+                },
+                endOffset,
+                2f
+            ).SetEase(Ease.InOutSine);
+        }
+
+
         public void SetOutlineActive(bool isActive)
         {
             if (outlineFX != null)

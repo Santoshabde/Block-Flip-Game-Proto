@@ -30,6 +30,7 @@ namespace BlockFlipProto.Gameplay
         [SerializeField] private int rightBlockCount;
         [SerializeField] private int depthBlockCount;
         [SerializeField] private BlockRotationDirection possibleRotationDirections;
+        [SerializeField] private Collider collider;
 
         //Private Region
         private Vector3 forwardRotationPoint;
@@ -140,6 +141,8 @@ namespace BlockFlipProto.Gameplay
                         SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.BlockSettledInHome, this.gameObject);
                         SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.PowerUpDeactivated, PowerupTypeInGame.BlockDestroyer);
 
+                        collider.enabled = false;
+                        blockController.BlockVFXController.PlayDissolveEffect();
                         BF_BlocksController.Instance.ClearBlock(this);
                     }
                 }

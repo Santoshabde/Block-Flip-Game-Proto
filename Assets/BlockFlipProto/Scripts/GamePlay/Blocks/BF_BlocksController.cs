@@ -32,8 +32,8 @@ namespace BlockFlipProto.Gameplay
 
             block.onBlockDimentionCalculationBegin -= onBlockDimentionCalculationBegin;
             block.onBlockDimentionCalculationEnd -= onBlockDimentionCalculationEnd;
-
-            Destroy(block.gameObject);
+            
+            Destroy(block.gameObject, 3f);
         }
 
         public void ClearAllBlocksInGame()
