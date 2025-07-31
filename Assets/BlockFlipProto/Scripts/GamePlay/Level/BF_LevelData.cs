@@ -55,6 +55,7 @@ namespace BlockFlipProto.Level
         public List<TileIndex> greenTilesIndices;
         public List<TileIndex> blueTilesIndices;
         public List<TileIndex> yellowTilesIndices;
+        public List<TileIndex> purpleTilesIndices;
         public List<BlockData> blocksData;
 
         // Camera Settings

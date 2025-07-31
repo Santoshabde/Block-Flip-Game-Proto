@@ -632,7 +632,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.55436087, y: -0, z: -0, w: 0.8322764}
-  m_LocalPosition: {x: 9.62, y: 18.99, z: 4.42}
+  m_LocalPosition: {x: 9.62, y: 22, z: 4.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1895,6 +1895,8 @@ MonoBehaviour:
     TileData: {fileID: 8508642907183235401, guid: 034539c6382cfea458d4b71749561465, type: 3}
   - Type: 4
     TileData: {fileID: 8508642907183235401, guid: 19407462cb49ce64281fa20021f21e15, type: 3}
+  - Type: 5
+    TileData: {fileID: 8508642907183235401, guid: 5df4ffe658cdeb34fb3c5b5fc6a0f893, type: 3}
   blockedTile: {fileID: 8217664102561444253, guid: a3d4d826ab5aadc42b8844865eb6083b, type: 3}
   gridParent: {fileID: 1721257252}
 --- !u!1 &1092681642

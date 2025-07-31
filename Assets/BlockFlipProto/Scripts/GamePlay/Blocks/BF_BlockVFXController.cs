@@ -13,18 +13,18 @@ namespace BlockFlipProto.Gameplay
 
         public void AnimateBlockReachingHome(TileType homeTileType)
         {
-            Sequence sequence = DOTween.Sequence();
-            sequence.Append(transform.DOScale(Vector3.one * 1.2f, 0.2f))
-                    .Append(transform.DOScale(Vector3.one, 0.2f));
+            PlayClearEffect();
+            //  Sequence sequence = DOTween.Sequence();
+            //  sequence.Append(transform.DOScale(Vector3.one * 1.2f, 0.2f))
+            //          .Append(transform.DOScale(Vector3.one, 0.2f));
 
-            sequence.OnComplete(() => MoveBlockInDesiredDirection(homeTileType));
+            //  sequence.OnComplete(() => MoveBlockInDesiredDirection(homeTileType));
         }
 
         private void MoveBlockInDesiredDirection(TileType homeTileType)
         {
             MovementDirections movementDirection = BF_BlocksController.Instance.TileMovementDirectionsInHome.Find(t => t.tileIndex == homeTileType).movementDirection;
 
-            Debug.Log($"#san Moving block in direction: {movementDirection} for tile type: {homeTileType}");
             switch (movementDirection)
             {
                 case MovementDirections.Left:

@@ -1257,77 +1257,101 @@ MonoBehaviour:
       },         {             "x": 6,             "y": 8         },         {            
       "x": 14,             "y": 8         },         {             "x": 14,            
       "y": 16         },         {             "x": 13,             "y": 16        
-      }     ],     "redTilesIndices": [],     "greenTilesIndices": [  {            
-      "x": 12,             "y": 7         },  {             "x": 12,            
-      "y": 6         },  {             "x": 12,             "y": 5         },  {            
-      "x": 12,             "y": 4         },  {             "x": 12,            
-      "y": 3         },  {             "x": 12,             "y": 2         },  {            
-      "x": 12,             "y": 1         }],     "blueTilesIndices": [  {            
-      "x": 5,             "y": 11  }, {             "x": 4,             "y": 11 
-      } , {             "x": 3,             "y": 11         }, {             "x":
-      2,             "y": 11         }, {             "x": 1,             "y": 11        
-      }, {             "x": 0,             "y": 11         }, {             "x":
-      5,             "y": 12         }, {             "x": 4,             "y": 12        
-      }, {             "x": 3,             "y": 12         }, {             "x":
-      2,             "y": 12         }, {             "x": 1,             "y": 12        
-      }, {             "x": 0,             "y": 12         }],     "yellowTilesIndices":
+      }     ],     "redTilesIndices": [         {             "x": 10,            
+      "y": 17         },         {             "x": 10,             "y": 18        
+      },         {             "x": 10,             "y": 19         },         {            
+      "x": 10,             "y": 20         },         {             "x": 10,            
+      "y": 21         },         {             "x": 10,             "y": 22        
+      },         {             "x": 10,             "y": 23         },         {            
+      "x": 10,             "y": 24         }     ],     "greenTilesIndices": [        
+      {             "x": 12,             "y": 7         },         {            
+      "x": 12,             "y": 6         },         {             "x": 12,            
+      "y": 5         },         {             "x": 12,             "y": 4        
+      },         {             "x": 12,             "y": 3         },         {            
+      "x": 12,             "y": 2         },         {             "x": 12,            
+      "y": 1         }     ],     "blueTilesIndices": [         {             "x":
+      5,             "y": 11         },         {             "x": 4,            
+      "y": 11         },         {             "x": 3,             "y": 11        
+      },         {             "x": 2,             "y": 11         },         {            
+      "x": 1,             "y": 11         },         {             "x": 0,            
+      "y": 11         },         {             "x": 5,             "y": 12        
+      },         {             "x": 4,             "y": 12         },         {            
+      "x": 3,             "y": 12         },         {             "x": 2,            
+      "y": 12         },         {             "x": 1,             "y": 12        
+      },         {             "x": 0,             "y": 12         }     ],     "yellowTilesIndices":
       [         {             "x": 8,             "y": 7         },         {            
       "x": 8,             "y": 6         },         {             "x": 8,            
       "y": 5         },         {             "x": 8,             "y": 4        
       },         {             "x": 8,             "y": 3         },         {            
       "x": 8,             "y": 2         },         {             "x": 8,            
-      "y": 1         }     ],     "blocksData": [         {             "blockType":
-      1,             "blockPosition": {                 "x": 7.5,                
-      "y": 0,                 "z": 8             },             "blockRotation":
-      {                 "x": 0,                 "y": 90,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 2         },         {            
-      "blockType": 1,             "blockPosition": {                 "x": 12.5,                
-      "y": 0,                 "z": 8             },             "blockRotation":
-      {                 "x": 0,                 "y": 90,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 2         },         {            
-      "blockType": 1,             "blockPosition": {                 "x": 9,                
-      "y": 0,                 "z": 10.5             },             "blockRotation":
-      {                 "x": 0,                 "y": 0,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 2         },         {            
-      "blockType": 1,             "blockPosition": {                 "x": 11,                
-      "y": 0,                 "z": 10.5             },             "blockRotation":
-      {                 "x": 0,                 "y": 0,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 2         },         {            
-      "blockType": 1,             "blockPosition": {                 "x": 10,                
-      "y": 0,                 "z": 9.5             },             "blockRotation":
-      {                 "x": 0,                 "y": 0,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 5         },         {            
-      "blockType": 2,             "blockPosition": {                 "x": 7.5,                
-      "y": 0.5,                 "z": 11             },             "blockRotation":
-      {                 "x": 90,                 "y": 0,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 5         },         {            
-      "blockType": 2,             "blockPosition": {                 "x": 6.5,                
-      "y": 0,                 "z": 12.5             },             "blockRotation":
-      {                 "x": 0,                 "y": 0,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 1         },         {            
-      "blockType": 3,             "blockPosition": {                 "x": 8,                
-      "y": 0,                 "z": 15             },             "blockRotation":
-      {                 "x": 0,                 "y": 0,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 1         },         {            
-      "blockType": 2,             "blockPosition": {                 "x": 12.5,                
-      "y": 0.5,                 "z": 13             },             "blockRotation":
-      {                 "x": 90,                 "y": 0,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 4         },         {            
-      "blockType": 3,             "blockPosition": {                 "x": 12,                
-      "y": 0,                 "z": 15             },             "blockRotation":
-      {                 "x": 0,                 "y": 0,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 3         },         {            
-      "blockType": 2,             "blockPosition": {                 "x": 13.5,                
-      "y": 0,                 "z": 11.5             },             "blockRotation":
-      {                 "x": 0,                 "y": 0,                 "z": 0            
-      },             "blockTileToWhichItBelongs": 3         }     ],     "cameraPosition":
-      {         "x": 10.02,         "y": 18.7,         "z": 5.2     },     "cameraRotation":
-      {         "x": 72.225,         "y": 0,         "z": 0     },     "cameraFOV":
-      60,     "tileMovementDirectionsInHome": [         {             "tileIndex":
-      2,             "movementDirection": 0         },         {             "tileIndex":
-      4,             "movementDirection": 0         },         {             "tileIndex":
-      1,             "movementDirection": 1         },         {             "tileIndex":
-      3,             "movementDirection": 1         }     ] }'
+      "y": 1         }     ],     "purpleTilesIndices": [         {             "x":
+      15,             "y": 12         },         {             "x": 16,            
+      "y": 12         },         {             "x": 17,             "y": 12        
+      },         {             "x": 18,             "y": 12         },         {            
+      "x": 19,             "y": 12         },         {             "x": 20,            
+      "y": 12         },         {             "x": 21,             "y": 12        
+      },         {             "x": 22,             "y": 12         },         {            
+      "x": 23,             "y": 12         },         {             "x": 24,            
+      "y": 12         },         {             "x": 15,             "y": 13        
+      },         {             "x": 16,             "y": 13         },         {            
+      "x": 17,             "y": 13         },         {             "x": 18,            
+      "y": 13         },         {             "x": 19,             "y": 13        
+      },         {             "x": 20,             "y": 13         },         {            
+      "x": 21,             "y": 13         },         {             "x": 22,            
+      "y": 13         },         {             "x": 23,             "y": 13        
+      },         {             "x": 24,             "y": 13         }     ],    
+      "blocksData": [         {             "blockType": 1,             "blockPosition":
+      {                 "x": 7.5,                 "y": 0,                 "z": 8            
+      },             "blockRotation": {                 "x": 0,                 "y":
+      90,                 "z": 0             },             "blockTileToWhichItBelongs":
+      2         },         {             "blockType": 1,             "blockPosition":
+      {                 "x": 12.5,                 "y": 0,                 "z": 8            
+      },             "blockRotation": {                 "x": 0,                 "y":
+      90,                 "z": 0             },             "blockTileToWhichItBelongs":
+      2         },         {             "blockType": 1,             "blockPosition":
+      {                 "x": 9,                 "y": 0,                 "z": 10.5            
+      },             "blockRotation": {                 "x": 0,                 "y":
+      0,                 "z": 0             },             "blockTileToWhichItBelongs":
+      2         },         {             "blockType": 1,             "blockPosition":
+      {                 "x": 11,                 "y": 0,                 "z": 10.5            
+      },             "blockRotation": {                 "x": 0,                 "y":
+      0,                 "z": 0             },             "blockTileToWhichItBelongs":
+      2         },         {             "blockType": 1,             "blockPosition":
+      {                 "x": 10,                 "y": 0,                 "z": 9.5            
+      },             "blockRotation": {                 "x": 0,                 "y":
+      0,                 "z": 0             },             "blockTileToWhichItBelongs":
+      5         },         {             "blockType": 2,             "blockPosition":
+      {                 "x": 7.5,                 "y": 0.5,                 "z":
+      11             },             "blockRotation": {                 "x": 90,                
+      "y": 0,                 "z": 0             },             "blockTileToWhichItBelongs":
+      5         },         {             "blockType": 2,             "blockPosition":
+      {                 "x": 6.5,                 "y": 0,                 "z": 12.5            
+      },             "blockRotation": {                 "x": 0,                 "y":
+      0,                 "z": 0             },             "blockTileToWhichItBelongs":
+      1         },         {             "blockType": 3,             "blockPosition":
+      {                 "x": 8,                 "y": 0,                 "z": 15            
+      },             "blockRotation": {                 "x": 0,                 "y":
+      0,                 "z": 0             },             "blockTileToWhichItBelongs":
+      1         },         {             "blockType": 2,             "blockPosition":
+      {                 "x": 12.5,                 "y": 0.5,                 "z":
+      13             },             "blockRotation": {                 "x": 90,                
+      "y": 0,                 "z": 0             },             "blockTileToWhichItBelongs":
+      4         },         {             "blockType": 3,             "blockPosition":
+      {                 "x": 12,                 "y": 0,                 "z": 15            
+      },             "blockRotation": {                 "x": 0,                 "y":
+      0,                 "z": 0             },             "blockTileToWhichItBelongs":
+      3         },         {             "blockType": 2,             "blockPosition":
+      {                 "x": 13.5,                 "y": 0,                 "z": 11.5            
+      },             "blockRotation": {                 "x": 0,                 "y":
+      0,                 "z": 0             },             "blockTileToWhichItBelongs":
+      3         }     ],     "cameraPosition": {         "x": 10.02,         "y":
+      22,         "z": 5.2     },     "cameraRotation": {         "x": 72.225,        
+      "y": 0,         "z": 0     },     "cameraFOV": 60,     "tileMovementDirectionsInHome":
+      [         {             "tileIndex": 2,             "movementDirection": 0        
+      },         {             "tileIndex": 4,             "movementDirection": 0        
+      },         {             "tileIndex": 1,             "movementDirection": 1        
+      },         {             "tileIndex": 3,             "movementDirection": 1        
+      }     ] }'
   blocksInfo:
   - blockType: 0
     block: {fileID: 5507928306921478859, guid: eca5a1ddd592fc3499594527a2858d96, type: 3}

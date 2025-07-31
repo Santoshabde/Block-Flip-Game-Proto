@@ -60,6 +60,7 @@ public class BF_LevelGenerator : MonoBehaviour
         gridController.SpawnHomeTiles(currentLevelData.blueTilesIndices, TileType.Blue_Final);
         gridController.SpawnHomeTiles(currentLevelData.redTilesIndices, TileType.Red_Final);
         gridController.SpawnHomeTiles(currentLevelData.greenTilesIndices, TileType.Green_Final);
+        gridController.SpawnHomeTiles(currentLevelData.purpleTilesIndices, TileType.Orange_Final);
 
         // -- Setup camera position and rotation
         Camera.main.transform.position = currentLevelData.cameraPosition;
