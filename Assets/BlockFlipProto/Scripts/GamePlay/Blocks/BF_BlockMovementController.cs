@@ -142,7 +142,7 @@ namespace BlockFlipProto.Gameplay
                         SNEventsController<InGameEvents>.TriggerEvent(InGameEvents.PowerUpDeactivated, PowerupTypeInGame.BlockDestroyer);
 
                         collider.enabled = false;
-                        blockController.BlockVFXController.PlayDissolveEffect();
+                        blockController.BlockVFXController.PlayClearEffect();
                         BF_BlocksController.Instance.ClearBlock(this);
                     }
                 }

@@ -56,23 +56,39 @@ namespace BlockFlipProto.Gameplay
 
         }
 
-        public void PlayDissolveEffect()
+        public void PlayClearEffect()
         {
-            Vector3 currentOffset = new Vector3(0, -1f, 0);
-            Vector3 endOffset = new Vector3(0, 1f, 0);
+            Transform blockTransform = transform;
 
-            DOTween.To(
-                () => currentOffset,
-                value =>
-                {
-                    currentOffset = value;
-                    blockMeshRenderer.material.SetVector("DissolveOffest", value);
-                },
-                endOffset,
-                2f
-            ).SetEase(Ease.InOutSine);
+            blockTransform.localScale = Vector3.one;
+            Material mat = blockMeshRenderer.material;
+            Color originalColor = mat.color;
+
+            Sequence seq = DOTween.Sequence();
+
+            // 0. Rise up by 2 units
+            seq.Append(blockTransform.DOMoveY(blockTransform.position.y + 2f, 0.2f).SetEase(Ease.OutCubic));
+
+            // 1. Flash Color (white flash effect)
+            seq.Append(mat.DOColor(Color.white, 0.05f));
+            seq.Append(mat.DOColor(originalColor, 0.1f));
+
+            // 2. Pop scale up with squash
+            seq.Join(blockTransform.DOScale(new Vector3(1.4f, 0.7f, 1.4f), 0.1f).SetEase(Ease.OutQuad));
+
+            // 3. Stretch back before vanish
+            seq.Append(blockTransform.DOScale(new Vector3(0.6f, 1.3f, 0.6f), 0.1f).SetEase(Ease.InOutQuad));
+
+            // 4. Quick spin + scale vanish
+            seq.Join(blockTransform.DORotate(new Vector3(0, 0, 180), 0.2f, RotateMode.FastBeyond360).SetEase(Ease.InQuad));
+            seq.Append(blockTransform.DOScale(Vector3.zero, 0.2f).SetEase(Ease.InBack));
+
+            // 5. (Optional) disable or destroy
+            seq.OnComplete(() =>
+            {
+                gameObject.SetActive(false);
+            });
         }
-
 
         public void SetOutlineActive(bool isActive)
         {
