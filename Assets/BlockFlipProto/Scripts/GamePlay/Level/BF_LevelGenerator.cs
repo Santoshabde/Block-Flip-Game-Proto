@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class BF_LevelGenerator : MonoBehaviour
 {
+    [SerializeField] private bool isLevelDebugMode;
     [SerializeField] private BF_LevelConfig levelConfig;
     [SerializeField] private int currentLevel = 1;
 
@@ -45,7 +46,7 @@ public class BF_LevelGenerator : MonoBehaviour
     private void FillUpCurrentLevel()
     {
         // -- Loading currentLevel From Saved Data
-        currentLevel = BF_GameSaveSystem.GetLevel();
+        currentLevel = isLevelDebugMode? currentLevel : BF_GameSaveSystem.GetLevel();
 
         // -- Fetching level data from the config
         BF_LevelData currentLevelData = JsonUtility.FromJson<BF_LevelData>(levelConfig.levelDatas[currentLevel - 1].levelJson);

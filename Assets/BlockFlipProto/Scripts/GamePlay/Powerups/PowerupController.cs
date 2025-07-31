@@ -49,6 +49,7 @@ public class PowerupController : MonoBehaviour
         {
             BF_BasePowerup powerup = Instantiate(powerupData.powerup, powerupsContainer);
             int amount = BF_GameSaveSystem.GetPowerupAmount(powerupData.powerupType);
+            Debug.Log($"[BlockFlip_Gameplay] Powerup type: {powerupData.powerupType} amount: {amount}");
             amount = amount == -1 ? powerupData.defaultAmount : amount;
             if (level >= powerupData.levelInWhichThisUnlocks)
             {

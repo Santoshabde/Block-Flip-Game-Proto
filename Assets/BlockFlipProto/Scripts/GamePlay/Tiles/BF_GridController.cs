@@ -20,6 +20,7 @@ namespace BlockFlipProto.Gameplay
         Red_Final,
         Yellow_Final,
         Blue_Final,
+        Orange_Final
     }
 
     [System.Serializable]

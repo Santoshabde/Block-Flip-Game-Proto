@@ -950,8 +950,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5313ac68f9c56254c905e8a153ad6e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isLevelDebugMode: 1
   levelConfig: {fileID: 11400000, guid: 9e1640768793a4c4096475b85601a76b, type: 2}
-  currentLevel: 2
+  currentLevel: 3
   gridController: {fileID: 1004066547}
   blocksController: {fileID: 473038384}
 --- !u!1 &473038382
@@ -965,7 +966,7 @@ GameObject:
   - component: {fileID: 473038383}
   - component: {fileID: 473038384}
   m_Layer: 0
-  m_Name: BlockController
+  m_Name: BlocksController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1008,6 +1009,8 @@ MonoBehaviour:
     material: {fileID: 2100000, guid: 5e91440aea476c743841e7bb008afc54, type: 2}
   - tileType: 4
     material: {fileID: 2100000, guid: 6755ad145a7d7da4c825ce50000232e3, type: 2}
+  - tileType: 5
+    material: {fileID: 2100000, guid: 9ca5cb1824629154fb4a27933a9fca78, type: 2}
 --- !u!1 &498883616
 GameObject:
   m_ObjectHideFlags: 0
